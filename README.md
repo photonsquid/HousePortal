@@ -1,1 +1,1 @@
-# homenet-frontend
+# Homenet - frontend
