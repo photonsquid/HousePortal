@@ -1,1 +1,1 @@
-# HousePortal - frontend
+# HousePortal
