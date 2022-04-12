@@ -66,7 +66,7 @@ jobs:
 
       - name: Push to GitHub Packages
         run: |
-          docker push ghcr.io/photonsquid/houseportal
+          docker push ghcr.io/photonsquid/houseportal:latest
       
       - name: Logout
         run: |
