@@ -1,0 +1,23 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main  # Push to main branch
+
+jobs:
+  deploy:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: "Set up node"
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - name: "Deploy" # does nothing at the moment
+        run: |
+          rm -rf node_modules && yarn install --frozen-lockfile
+          yarn run build --if-present
+          
