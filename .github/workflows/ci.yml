@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  check:
+  test:
     runs-on: "ubuntu-latest"
 
     steps:
@@ -19,8 +19,23 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: "Continuous integration checks"
+      - uses: actions/cache@v1
+        id: npm-cache
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json')}}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: Install dependencies from cache
+        run: |
+          rm -rf node_modules && yarn install --prefer-offline --frozen-lockfile
+          
+      - name: Install dependencies from repository
         run: |
           rm -rf node_modules && yarn install --frozen-lockfile
+
+      - name: "Run tests"
+        run: |
           yarn run build --if-present
           yarn test
