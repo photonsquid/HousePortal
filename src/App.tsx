@@ -7,14 +7,17 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="Org-logo" alt="logo" />
-        <p>Welcome to HousePortal !</p>
+        <p>
+          Sorry... <br />
+          HousePortal isn't available yet
+        </p>
         <a
           className="App-link"
           href="https://github.com/photonsquid"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Follow us on GitHub
+          But you can follow us on GitHub
         </a>
       </header>
     </div>
