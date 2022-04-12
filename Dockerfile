@@ -8,7 +8,7 @@ WORKDIR /app/houseportal
 COPY . .
 
 # Install frozen dependencies and copy 
-RUN yarn install --frozen-lockfile && ./scripts/docker_init.sh /init.sh && chmod +x /init.sh
+RUN yarn install --frozen-lockfile && cp ./scripts/docker_init.sh /init.sh && chmod +x /init.sh
 
 EXPOSE 8080
 
