@@ -77,6 +77,6 @@ jobs:
       needs: deploy
           
       steps:
-        - name: Create Draft Release # unfinished
+        - name: Create Draft Release
           run: |
-            echo "Creating release draft was skipped"
+            echo "Sorry, draft release creation is not implemented yet."
