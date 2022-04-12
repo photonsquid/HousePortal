@@ -1,15 +1,12 @@
-name: CI
+name: Deploy
 
 on:
   push:
-    branches-ignore:
-      - main
-  pull_request:
-    branches-ignore:
-      - main
+    branches:
+      - main  # Push to main branch
 
 jobs:
-  check:
+  deploy:
     runs-on: "ubuntu-latest"
 
     steps:
@@ -19,8 +16,8 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: "Continuous integration checks"
+      - name: "Deploy" # does nothing at the moment
         run: |
           rm -rf node_modules && yarn install --frozen-lockfile
           yarn run build --if-present
-          yarn test
+          
