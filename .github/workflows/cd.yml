@@ -82,6 +82,6 @@ jobs:
         
     steps:
       - name: Create Draft Release
-      - uses: release-drafter/release-drafter@v5
-        env: 
+        uses: release-drafter/release-drafter@v5
+        env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
