@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Push to main branch
+      - ci-cd/*
 
 jobs:
   test:
