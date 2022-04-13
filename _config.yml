@@ -1,4 +1,4 @@
-theme: jekyll-theme-slate
+theme: jekyll-theme-minimal
 title: HousePortal
 description: A control and monitoring portal for your smart home
 show_downloads: true
