@@ -4,7 +4,9 @@
       "path": "."
     }
   ],
-  "settings": {},
+  "settings": {
+    "conventionalCommits.scopes": ["cd-trigger"]
+  },
   "launch": {
     "configurations": [
       {
