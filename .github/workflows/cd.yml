@@ -26,7 +26,7 @@ jobs:
   publish:
     runs-on: "ubuntu-latest"
     needs: test
-    if: "contains(github.event.head_commit.message, 'cd-trigger') || contains(github.event.head_commit.message, 'Merge & deploy')"
+    if: "contains(github.event.head_commit.message, 'trigger-cd') || contains(github.event.head_commit.message, 'Merge & deploy')"
 
     steps:
       - uses: actions/checkout@v1
@@ -75,6 +75,12 @@ jobs:
       - name: Logout
         run: |
           docker logout
+      
+      -name: Create commit comment
+        uses: peter-evans/commit-comment@v2
+        with:
+          body: |
+            ✅ This commit was successfully deployed to github packages (keyword triggered run).   
     
   release:
     runs-on: "ubuntu-latest"
