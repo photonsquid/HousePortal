@@ -1,0 +1,14 @@
+name: release
+
+on:
+  issue_comment:
+    types:
+      - edited
+
+jobs:
+  commit_commented:
+    name: Commit comment
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+        echo github event: ${{ github.event.type }}
