@@ -81,7 +81,8 @@ jobs:
         uses: peter-evans/commit-comment@v2
         with:
           body: |
-            ✅ This commit was successfully deployed to github packages (keyword triggered run).   
+            ✔️ This commit was successfully deployed to github packages (keyword triggered run).  
+            > Commit reference: `${{ github.sha }}`
     
   release:
     runs-on: "ubuntu-latest"
