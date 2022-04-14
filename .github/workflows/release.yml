@@ -1,18 +1,10 @@
 name: release
 
 on:
-  issue_comment:
-    types:
-      - edited
+  workflow_dispatch
+
 
 jobs:
-  commit_commented:
-    name: Commit comment
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-        echo github event: ${{ github.event.type }}
-  
   release:
     runs-on: "ubuntu-latest"
     needs: commit_commented
@@ -22,4 +14,3 @@ jobs:
         uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          
