@@ -1,5 +1,8 @@
 theme: jekyll-theme-slate
+remote_theme: pages-themes/slate@v0.2.0
 title: HousePortal
 description: A control and monitoring portal for your smart home
 include:
 - _posts
+plugins:
+- jekyll-remote-theme

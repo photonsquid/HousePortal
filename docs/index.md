@@ -9,7 +9,7 @@ HousePortal is a clean and minimal interface to monitor and control your smart d
   <h3>{{ categ[0] }}</h3>
   <ul>
     {% for post in categ[1] %}
-      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+      <li><a href=".{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
   </ul>
 {% endfor %}
