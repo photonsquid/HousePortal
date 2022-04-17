@@ -1,0 +1,45 @@
+# Homenet - Compte rendu semaine 02
+
+## Sommaire
+
+- [Homenet - Compte rendu semaine 02](#homenet---compte-rendu-semaine-02)
+  - [Sommaire](#sommaire)
+    - [Introduction](#introduction)
+    - [Backlog](#backlog)
+    - [Première architecture de la BDD SQL](#première-architecture-de-la-bdd-sql)
+    - [Tâches à réaliser dans le courant de la semaine prochaine](#tâches-à-réaliser-dans-le-courant-de-la-semaine-prochaine)
+    - [Environnement de développement](#environnement-de-développement)
+    - [CI/CD](#cicd)
+
+### Introduction
+Le rapport de cette semaine aborde l'écriture du backlog du produit, ainsi que la construction des environnements de développement du backend autant que du front-end, et définit les tâches que nous prévoyons de réaliser dans le courant de la semaine prochaine.
+
+### Backlog
+- **création de comptes (authentification à l'aide d'un email, de Google, Facebook, Github, etc... )**  
+Utilisation des diverses APIs OAuth 2.0 disponibles, et mise à jour de la BDD. Mise en place d'un système de cookies (connexion persistante) afin d'éviter à l’utilisateur une reconnexion à chaque chargement de la page.
+- **enregistrement/suppression d'appareils**  
+Utilisation des APIs disponibles dans le but d'enregistrer/supprimer des objets dans la liste d'appareils controlables de l’utilisateur.
+- **Affichage de la liste d'objets**  
+Interaction avec la base de donnée pour afficher la liste des objets de l’utilisateur.
+- **Integration de comptes Google Home, Philips HUE, etc...**
+- **Contrôle de ces objets**  
+Envoi d'instructions et récupération d'informations a propos de ces objets, via les APIs disponibles.
+- **Affichage d'un log (historique) des actions**
+Enregistrement de chaque action de l’utilisateur dans la BDD avec pour objectif l'affichage de l'historique des évenements et interactions avec les objets. Cette fonctionnalité pourra être désactivée si besoin, dans un souci de confidentialité.
+
+### Première architecture de la BDD SQL
+1. users (mail / 🔑id / password / OAuth 2.0)
+2. devices (userId, deviceName, 🔑deviceID, type, actions, ip address)
+3. history (🔑id, userId, timestamp, ipAddress, …)
+
+### Tâches à réaliser dans le courant de la semaine prochaine
+Nous avons prévu d'implémenter la création de comptes et l'authentification, ce qui implique d'avoir créé la page de login/register, et de pouvoir modifier la BDD, en y enregistrant les nouveaux comptes. L'authentification persistante est également prévue, bien qu'optionnelle.
+
+### Environnement de développement
+Comme mentionné précédemment, cette semaine a été partiellement consacrée à l'initialisation des dépôts Git, hébergés sur GitHub, et à la création des environnements de développement. Le front-end est basé sur le framework React, et utilise le gestionnaire de packets yarn pour la gestion des dépendances, et l'automatisation de la compilation/exécution. Le backend, lui, met en oeuvre la technologie jakarta EE, avec Jboss-Wildfly, et utilise gradle pour la gestion de ses dépendances. Nous avons dans les deux cas fait le choix de déployer ces applications sous la forme de conteneurs Docker, pour des raisons de facilité d'utilisation et de flexibilité. 
+
+### CI/CD
+Nous avons décidé de mettre en place une infrastructure CI/CD, afin de pouvoir tester rapidement les différents composants du produit, et de pouvoir les déployer sur le serveur. Tout commit effectué sur le dépôt GitHub sera automatiquement testé, quelle que soit la branche. Le déploiement ne peut avoir lieu que depuis la branche main, et peut être déclenché à l'aide de mots clés dans le message du commit. Ainsi, lorsqu'une fusion de demande d'extraction a lieu dans la branche main, tout message contenant la chaine `Merge & deploy` déclenchera le déploiement de l'application. De la même façon, tout commit directement effectué sur la branche main (réservé aux hotfix) dont le message contient le mot clé `trigger-cd` déclenchera aussi le déploiement. L'image docker est déployée sur `ghcr.io`, la plateforme de hosting de GitHub, et nos serveurs se chargent de la télécharger et de l'installer à chaque déploiement.
+
+Le dépôt du front-end est accessible à [cette adresse](https://github.com/photonsquid/HousePortal "HousePortal").  
+Celui du backend est accessible à [celle-ci](https://github.com/photonsquid/HousePortal-backend "HousePortal-backend").
