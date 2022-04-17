@@ -1,10 +1,10 @@
+![banner](docs/res/HousePortal_banner_readme.png)
+
 # HousePortal
 
-<img src="public/houseportal.svg" alt="Logo" width="100" align="left" />
+**A clean and minimal interface to monitor and control your smart devices, such as light bulbs, light switches, TVs, bluetooth speakers, and many others.**
 
-A clean and minimal interface to monitor and control your smart devices, such as light bulbs, light switches, TVs, bluetooth speakers, and many others.
-
-> Built using React JS.
+*Built with React JS*.
 
 ## Installation
 
