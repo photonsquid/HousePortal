@@ -5,7 +5,7 @@
     }
   ],
   "settings": {
-    "conventionalCommits.scopes": ["cd-trigger"]
+    "conventionalCommits.scopes": []
   },
   "launch": {
     "configurations": [

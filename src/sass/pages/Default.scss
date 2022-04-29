@@ -1,4 +1,4 @@
-.App {
+.default-app {
   text-align: center;
   font-family: "Courier New", Courier, monospace;
 }
@@ -15,7 +15,7 @@
   }
 }
 
-.App-header {
+.default-app-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -26,7 +26,7 @@
   color: white;
 }
 
-.App-link {
+.default-app-link {
   color: #fb6661;
   font-size: smaller;
 }
