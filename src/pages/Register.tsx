@@ -1,40 +1,55 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import logo from 'assets/photonsquid.svg';
 
-export default function Login() {
+export default function Register() {
   const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [password, setPassword1] = React.useState('');
+  const [password2, setPassword2] = React.useState('');
+  const [email, setEmail] = React.useState('');
   const navigate = useNavigate();
 
   function handleInputChange(event: React.FormEvent<HTMLInputElement>) {
     const target = event.target as HTMLTextAreaElement;
     const { value } = target;
     const { name } = target;
-    if (name === 'username') {
-      setUsername(value);
-    } else if (name === 'password') {
-      setPassword(value);
+    switch (name) {
+      case 'username':
+        setUsername(value);
+        break;
+      case 'password1':
+        setPassword1(value);
+        break;
+      case 'password2':
+        setPassword2(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      default:
+        break;
     }
   }
 
-  function handleLogin() {
-    // database stuff (not implemented yet)
-    // atm we're just letting anyone sign up
-    console.log('username:', username);
-    console.log('password:', password);
+  function handleCancel() {
+    navigate('/');
   }
 
   function handleRegister() {
-    navigate('/register');
+    // database stuff (not implemented yet)
+    // atm we're just letting anyone sign up
+
+    console.log('username:', username);
+    console.log('password:', password);
+    console.log('email:', email);
   }
 
   return (
     <div className="credentials-wrapper">
       <div className="card centered centered-content">
         <div className="card-header">
-          <img src={logo} className="org-logo-sm" alt="logo" />
-          <h1>Sign in</h1>
+          <h1>Sign up</h1>
           <h2>HousePortal account</h2>
         </div>
         <div className="card-body centered-content">
@@ -42,38 +57,49 @@ export default function Login() {
             type="text"
             id="username"
             name="username"
-            placeholder="Email or username"
+            placeholder="Username"
+            required
+            onChange={handleInputChange}
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+            onChange={handleInputChange}
+            style={{ marginBottom: '2rem' }}
+          />
+          <input
+            type="password"
+            id="password1"
+            name="password1"
+            placeholder="Password"
             required
             onChange={handleInputChange}
           />
           <input
             type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
+            id="password2"
+            name="password2"
+            placeholder="Repeat password"
             required
             onChange={handleInputChange}
           />
-
-          <div className="settings-banner left-aligned">
-            <a href="htpps://example.com" className="password-retrieval">
-              Forgot password
-            </a>
-          </div>
           <div className="login-submit">
             <button
               type="button"
               style={{ float: 'left' }}
-              className="standard-bt b-secondary b-shadow"
-              onClick={handleRegister}
+              className="standard-bt b-error b-shadow"
+              onClick={handleCancel}
             >
-              Create account
+              Cancel
             </button>
             <button
               type="submit"
               className="standard-bt b-primary b-shadow"
               style={{ float: 'right' }}
-              onClick={handleLogin}
+              onClick={handleRegister}
             >
               Continue
             </button>

@@ -45,3 +45,13 @@
 .b-shadow:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+.b-error {
+  &:hover {
+    background-color: #e05a5a;
+    color: #fff;
+  }
+  background-color: #fff;
+  border-color: #ccc;
+  color: #333;
+}

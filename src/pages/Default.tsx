@@ -6,7 +6,7 @@ export default function Default() {
   return (
     <div className="default-app">
       <header className="default-app-header">
-        <img src={logo} className="Org-logo" alt="logo" />
+        <img src={logo} className="org-logo" alt="logo" />
         <p>
           Sorry...
           {' '}
