@@ -7,9 +7,25 @@
 }
 
 .card-header {
+  width: 100%;
+  box-sizing: border-box;
   margin-bottom: 40px;
 }
 
 .card-body {
+  width: 100%;
+  box-sizing: border-box;
   font-size: 1.2rem;
+}
+
+.card-note {
+  font-size: 0.8rem;
+  width: 100%;
+  box-sizing: border-box;
+  color: grey;
+  margin: 20px 0;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: left;
 }

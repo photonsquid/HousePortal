@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from 'assets/photonsquid.svg';
+import ThirdPartyAuth from 'components/ThirdPartyAuth';
 
 export default function Login() {
   const [username, setUsername] = React.useState('');
@@ -35,7 +36,7 @@ export default function Login() {
         <div className="card-header">
           <img src={logo} className="org-logo-sm" alt="logo" />
           <h1>Sign in</h1>
-          <h2>HousePortal account</h2>
+          <h2>with a HousePortal account</h2>
         </div>
         <div className="card-body centered-content">
           <input
@@ -60,6 +61,7 @@ export default function Login() {
               Forgot password
             </a>
           </div>
+          <ThirdPartyAuth type="login" />
           <div className="login-submit">
             <button
               type="button"

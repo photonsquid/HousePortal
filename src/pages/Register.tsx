@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import logo from 'assets/photonsquid.svg';
+import ThirdPartyAuth from 'components/ThirdPartyAuth';
 
 export default function Register() {
   const [username, setUsername] = React.useState('');
@@ -50,7 +51,7 @@ export default function Register() {
       <div className="card centered centered-content">
         <div className="card-header">
           <h1>Sign up</h1>
-          <h2>HousePortal account</h2>
+          <h2>create a HousePortal account</h2>
         </div>
         <div className="card-body centered-content">
           <input
@@ -86,6 +87,7 @@ export default function Register() {
             required
             onChange={handleInputChange}
           />
+          <ThirdPartyAuth type="register" />
           <div className="login-submit">
             <button
               type="button"
