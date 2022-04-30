@@ -1,8 +1,8 @@
 import React from 'react';
 
-import logo from './photonsquid.svg';
+import logo from 'assets/photonsquid.svg';
 
-function DefaultPage() {
+export default function Default() {
   return (
     <div className="default-app">
       <header className="default-app-header">
@@ -25,5 +25,3 @@ function DefaultPage() {
     </div>
   );
 }
-
-export default DefaultPage;

@@ -5,7 +5,10 @@
     }
   ],
   "settings": {
-    "conventionalCommits.scopes": []
+    "conventionalCommits.scopes": [],
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    }
   },
   "launch": {
     "configurations": [
