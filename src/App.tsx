@@ -10,7 +10,19 @@ import Dashboard from 'pages/Dashboard';
 import PrivacyWrapper from 'components/PrivacyWrapper';
 import Register from 'pages/Register';
 
-function App() {
+/**
+ *  A function that determines if the app is in development mode.
+ * @returns {boolean} true if the user is logged in
+ */
+export function isDev(): boolean {
+  return process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
+}
+
+/**
+ * The main application component.
+ * @returns {JSX.Element}
+ */
+function App(): JSX.Element {
   const [bearer, setBearer] = useState('');
   const [theme, setTheme] = useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   const toggleTheme = () => {

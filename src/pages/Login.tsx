@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import logo from 'assets/photonsquid.svg';
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
 import ThemeSwitcher from 'components/ThemeSwitcher';
+import { isDev } from 'App';
 
 export declare interface LoginData {
   email: string,
@@ -53,11 +54,15 @@ export default function Login({ setBearer, theme, toggleTheme }: LoginProps): JS
   }
 
   async function handleSubmit() {
-    const bearer = await requestLogin({
-      email,
-      password,
-    });
-    setBearer(bearer);
+    if (isDev()) {
+      setBearer('dev');
+    } else {
+      const bearer = await requestLogin({
+        email,
+        password,
+      });
+      setBearer(bearer);
+    }
     navigate('/');
   }
 

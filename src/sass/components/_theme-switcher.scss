@@ -52,22 +52,22 @@
       margin: 0;
     }
 
-    .name-dark {
-      opacity: 0.5;
-    }
-
     .ts-checkbox {
       display: none;
     }
 
-    .ts-checkbox:checked + .toggle {
-      transform: translateX(100%);
-      background-color: #4d4e5e;
+    .name-dark {
+      opacity: 0.5;
     }
-    .ts-checkbox:checked + .name-dark {
+
+    .ts-checkbox:checked ~ .toggle {
+      transform: translateX(100%);
+      background-color: #373847;
+    }
+    .ts-checkbox:checked ~ * .name-dark {
       opacity: 1;
     }
-    .ts-checkbox:checked + .name-light {
+    .ts-checkbox:checked ~ * .name-light {
       opacity: 0.5;
     }
   }
