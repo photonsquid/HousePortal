@@ -1,3 +1,5 @@
+import { isDev } from 'App';
+
 export declare interface LoginData {
   email: string;
   password: string;
@@ -17,7 +19,7 @@ export default class Session {
    * - no actual bearer token is generated
    * - all the data displayed in the UI is mocked
    */
-  devlogin() {
+  async devlogin() {
     this.bearerToken = 'dev';
   }
 
@@ -51,6 +53,8 @@ export default class Session {
       },
     });
     this.bearerToken = '';
+    // remove the token from local storage
+    localStorage.removeItem('bearerToken');
   }
 
   /**
@@ -74,7 +78,8 @@ export default class Session {
         Authorization: `Bearer ${this.bearerToken}`,
       },
     });
-    return response.ok;
+
+    return isDev() ? true : response.ok;
   }
 
   /**
@@ -90,5 +95,7 @@ export default class Session {
       body: JSON.stringify(accountData),
     });
     this.bearerToken = await response.json();
+    // save the token to local storage
+    localStorage.setItem('bearerToken', this.bearerToken);
   }
 }

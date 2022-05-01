@@ -24,10 +24,13 @@ export function isDev(): boolean {
  * @returns {JSX.Element}
  */
 function App(): JSX.Element {
-  const [theme, setTheme] = useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
   const session = new Session();
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    // save theme preference to local storage
+    localStorage.setItem('theme', newTheme);
   };
 
   return (
@@ -40,7 +43,7 @@ function App(): JSX.Element {
         <Route
           path="dashboard"
           element={(
-            <PrivacyWrapper session={session}>
+            <PrivacyWrapper theme={theme} session={session}>
               <Dashboard />
             </PrivacyWrapper>
           )}
