@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from 'assets/photonsquid.svg';
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
+import ThemeSwitcher from 'components/ThemeSwitcher';
 
 export declare interface LoginData {
   email: string,
@@ -28,13 +29,14 @@ async function requestLogin(credentials: LoginData) {
 export declare interface LoginProps {
   setBearer: (bearer: string) => void,
   theme?: string
+  toggleTheme?: () => void
 }
 
 /**
  * A page that allows a user to log in.
  * @returns {JSX.Element}
  */
-export default function Login({ setBearer, theme }: LoginProps): JSX.Element {
+export default function Login({ setBearer, theme, toggleTheme }: LoginProps): JSX.Element {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
@@ -65,6 +67,7 @@ export default function Login({ setBearer, theme }: LoginProps): JSX.Element {
 
   return (
     <div className={theme}>
+      <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
       <div className="credentials-wrapper">
         <div className="card centered centered-content">
           <div className="card-header">
@@ -123,4 +126,6 @@ export default function Login({ setBearer, theme }: LoginProps): JSX.Element {
 
 Login.defaultProps = {
   theme: 'light',
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  toggleTheme: () => {},
 };

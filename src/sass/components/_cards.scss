@@ -4,6 +4,7 @@
 @mixin themable($theme-name, $theme-map) {
   .#{$theme-name} {
     .card {
+      background-color: map-get($theme-map, card-bg);
       border: 1px solid map-get($theme-map, card-border);
       border-radius: 10px;
       padding: 40px;

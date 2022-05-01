@@ -1,0 +1,77 @@
+@import "../themes/dark";
+@import "../themes/light";
+
+@mixin themable($theme-name, $theme-map) {
+  .#{$theme-name} {
+    .ts-wrapper {
+      label {
+        width: 100%;
+        background-color: rgba(101, 112, 138, 0.288);
+        position: relative;
+        cursor: pointer;
+      }
+      position: absolute;
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(5%);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ts-wrapper label,
+    .toggle {
+      height: 2.2rem;
+      border-radius: 10px;
+    }
+
+    .toggle {
+      position: absolute;
+      width: 50%;
+      background-color: #fff;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .names {
+      font-size: 90%;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0px 15px;
+      margin-top: 8px;
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      user-select: none;
+    }
+
+    .name-dark,
+    .name-light {
+      color: map-get($theme-map, text-secondary);
+      font-weight: bolder;
+      margin: 0;
+    }
+
+    .name-dark {
+      opacity: 0.5;
+    }
+
+    .ts-checkbox {
+      display: none;
+    }
+
+    .ts-checkbox:checked + .toggle {
+      transform: translateX(100%);
+      background-color: #4d4e5e;
+    }
+    .ts-checkbox:checked + .name-dark {
+      opacity: 1;
+    }
+    .ts-checkbox:checked + .name-light {
+      opacity: 0.5;
+    }
+  }
+}
+
+@include themable(light, $light);
+@include themable(dark, $dark);

@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
+import ThemeSwitcher from 'components/ThemeSwitcher';
 
 export declare interface AccountData {
   username: string,
@@ -21,11 +22,16 @@ async function requestAccountCreation(accountData: AccountData) {
   return result;
 }
 
+export declare interface RegisterProps {
+  theme?: string,
+  toggleTheme?: () => void
+}
+
 /**
  * A page that allows a user to create an account.
  * @returns {JSX.Element}
  */
-export default function Register({ theme }: {theme?: string}): JSX.Element {
+export default function Register({ theme, toggleTheme }: RegisterProps): JSX.Element {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [passwordRed, setPasswordRed] = React.useState('');
@@ -71,6 +77,7 @@ export default function Register({ theme }: {theme?: string}): JSX.Element {
 
   return (
     <div className={theme}>
+      <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
       <div className="credentials-wrapper">
         <div className="card centered centered-content">
           <div className="card-header">
@@ -139,4 +146,6 @@ export default function Register({ theme }: {theme?: string}): JSX.Element {
 
 Register.defaultProps = {
   theme: 'light',
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  toggleTheme: () => {},
 };
