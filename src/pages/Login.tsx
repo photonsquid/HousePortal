@@ -4,31 +4,10 @@ import logo from 'assets/photonsquid.svg';
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
 import ThemeSwitcher from 'components/ThemeSwitcher';
 import { isDev } from 'App';
-
-export declare interface LoginData {
-  email: string,
-  password: string
-}
-
-/**
- * A function that tries to log in the user with the given credentials.
- * @param credentials the credentials to use for the login
- * @returns json object with the response from the server
- */
-async function requestLogin(credentials: LoginData) {
-  const response = await fetch('/api/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(credentials),
-  });
-  const result = await response.json();
-  return result;
-}
+import Session from 'utils/Session';
 
 export declare interface LoginProps {
-  setBearer: (bearer: string) => void,
+  session: Session,
   theme?: string
   toggleTheme?: () => void
 }
@@ -37,7 +16,7 @@ export declare interface LoginProps {
  * A page that allows a user to log in.
  * @returns {JSX.Element}
  */
-export default function Login({ setBearer, theme, toggleTheme }: LoginProps): JSX.Element {
+export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.Element {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
@@ -55,13 +34,12 @@ export default function Login({ setBearer, theme, toggleTheme }: LoginProps): JS
 
   async function handleSubmit() {
     if (isDev()) {
-      setBearer('dev');
+      session.devlogin();
     } else {
-      const bearer = await requestLogin({
+      session.login({
         email,
         password,
       });
-      setBearer(bearer);
     }
     navigate('/');
   }

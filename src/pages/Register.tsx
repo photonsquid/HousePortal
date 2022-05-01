@@ -3,26 +3,10 @@ import { useNavigate } from 'react-router-dom';
 
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
 import ThemeSwitcher from 'components/ThemeSwitcher';
-
-export declare interface AccountData {
-  username: string,
-  email: string,
-  password: string
-}
-
-async function requestAccountCreation(accountData: AccountData) {
-  const response = await fetch('/api/register', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(accountData),
-  });
-  const result = await response.json();
-  return result;
-}
+import Session from 'utils/Session';
 
 export declare interface RegisterProps {
+  session: Session,
   theme?: string,
   toggleTheme?: () => void
 }
@@ -31,7 +15,7 @@ export declare interface RegisterProps {
  * A page that allows a user to create an account.
  * @returns {JSX.Element}
  */
-export default function Register({ theme, toggleTheme }: RegisterProps): JSX.Element {
+export default function Register({ session, theme, toggleTheme }: RegisterProps): JSX.Element {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [passwordRed, setPasswordRed] = React.useState('');
@@ -66,7 +50,7 @@ export default function Register({ theme, toggleTheme }: RegisterProps): JSX.Ele
 
   async function handleSubmit() {
     if (password === passwordRed) {
-      await requestAccountCreation({
+      session.createUser({
         username,
         email,
         password,

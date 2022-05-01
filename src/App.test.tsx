@@ -5,6 +5,6 @@ import App from 'App';
 
 test('renders app correctly', () => {
   render(<App />);
-  const linkElement = screen.getByText(/HousePortal account/i);
+  const linkElement = screen.getByText(/Loading/i);
   expect(linkElement).toBeInTheDocument();
 });

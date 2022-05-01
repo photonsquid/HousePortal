@@ -1,15 +1,32 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import Session from 'utils/Session';
 
-function PrivacyWrapper({ children, bearer }: { children: React.ReactNode, bearer: string }) {
-  // TODO: implement this
-  const auth = bearer.length > 0;
+function PrivacyWrapper({ children, session }: { children: React.ReactNode, session: Session }) {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    session.isActive().then((isActive) => {
+      setIsLoading(false);
+      setIsLoggedIn(isActive);
+    });
+  }, [session]);
 
   return (
-    <div className="privacy-wrapper">
-      {auth ? children : <Navigate to="/login" />}
-    </div>
+    isLoading ? (
+      <div className="privacy-wrapper">
+        <div className="spinner-wrapper">
+          Loading
+          <div className="spinner" />
+        </div>
+      </div>
+    ) : (
+      <div className="privacy-wrapper">
+        {isLoggedIn ? children : <Navigate to="/login" />}
+      </div>
+    )
   );
 }
 
