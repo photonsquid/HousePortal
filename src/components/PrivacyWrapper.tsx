@@ -2,9 +2,9 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-export default function PrivacyWrapper({ children }: { children: React.ReactNode }) {
+function PrivacyWrapper({ children, bearer }: { children: React.ReactNode, bearer: string }) {
   // TODO: implement this
-  const auth = false;
+  const auth = bearer.length > 0;
 
   return (
     <div className="privacy-wrapper">
@@ -12,3 +12,5 @@ export default function PrivacyWrapper({ children }: { children: React.ReactNode
     </div>
   );
 }
+
+export default PrivacyWrapper;

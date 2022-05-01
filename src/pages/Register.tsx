@@ -1,13 +1,34 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import logo from 'assets/photonsquid.svg';
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
 
-export default function Register() {
+export declare interface AccountData {
+  username: string,
+  email: string,
+  password: string
+}
+
+async function requestAccountCreation(accountData: AccountData) {
+  const response = await fetch('/api/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(accountData),
+  });
+  const result = await response.json();
+  return result;
+}
+
+/**
+ * A page that allows a user to create an account.
+ * @returns {JSX.Element}
+ */
+export default function Register({ theme }: {theme?: string}): JSX.Element {
   const [username, setUsername] = React.useState('');
-  const [password, setPassword1] = React.useState('');
-  const [password2, setPassword2] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [passwordRed, setPasswordRed] = React.useState('');
   const [email, setEmail] = React.useState('');
   const navigate = useNavigate();
 
@@ -20,10 +41,10 @@ export default function Register() {
         setUsername(value);
         break;
       case 'password1':
-        setPassword1(value);
+        setPassword(value);
         break;
       case 'password2':
-        setPassword2(value);
+        setPasswordRed(value);
         break;
       case 'email':
         setEmail(value);
@@ -37,77 +58,85 @@ export default function Register() {
     navigate('/');
   }
 
-  function handleRegister() {
-    // database stuff (not implemented yet)
-    // atm we're just letting anyone sign up
-
-    console.log('username:', username);
-    console.log('password:', password);
-    console.log('email:', email);
+  async function handleSubmit() {
+    if (password === passwordRed) {
+      await requestAccountCreation({
+        username,
+        email,
+        password,
+      });
+      navigate('/');
+    }
   }
 
   return (
-    <div className="credentials-wrapper">
-      <div className="card centered centered-content">
-        <div className="card-header">
-          <h1>Sign up</h1>
-          <h2>create a HousePortal account</h2>
-        </div>
-        <div className="card-body centered-content">
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Username"
-            required
-            onChange={handleInputChange}
-          />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            required
-            onChange={handleInputChange}
-            style={{ marginBottom: '2rem' }}
-          />
-          <input
-            type="password"
-            id="password1"
-            name="password1"
-            placeholder="Password"
-            required
-            onChange={handleInputChange}
-          />
-          <input
-            type="password"
-            id="password2"
-            name="password2"
-            placeholder="Repeat password"
-            required
-            onChange={handleInputChange}
-          />
-          <ThirdPartyAuth type="register" />
-          <div className="login-submit">
-            <button
-              type="button"
-              style={{ float: 'left' }}
-              className="standard-bt b-error b-shadow"
-              onClick={handleCancel}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="standard-bt b-primary b-shadow"
-              style={{ float: 'right' }}
-              onClick={handleRegister}
-            >
-              Continue
-            </button>
+    <div className={theme}>
+      <div className="credentials-wrapper">
+        <div className="card centered centered-content">
+          <div className="card-header">
+            <h1>Sign up</h1>
+            <h2>create a HousePortal account</h2>
+          </div>
+          <div className="card-body centered-content">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Username"
+              required
+              onChange={handleInputChange}
+            />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              required
+              onChange={handleInputChange}
+              style={{ marginBottom: '2rem' }}
+            />
+            <input
+              type="password"
+              id="password1"
+              name="password1"
+              placeholder="Password"
+              required
+              onChange={handleInputChange}
+            />
+            <input
+              type="password"
+              id="password2"
+              name="password2"
+              placeholder="Repeat password"
+              required
+              onChange={handleInputChange}
+            />
+            <ThirdPartyAuth type="register" />
+            <div className="login-submit">
+              <button
+                type="button"
+                style={{ float: 'left' }}
+                className="standard-btn b-error b-shadow"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="standard-btn b-primary b-shadow"
+                style={{ float: 'right' }}
+                onClick={handleSubmit}
+              >
+                Continue
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+Register.defaultProps = {
+  theme: 'light',
+};

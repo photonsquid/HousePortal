@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
@@ -11,17 +11,20 @@ import PrivacyWrapper from 'components/PrivacyWrapper';
 import Register from 'pages/Register';
 
 function App() {
+  const [bearer, setBearer] = useState('');
+  const [theme, setTheme] = useState(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" />} />
         <Route path="default" element={<Default />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login setBearer={setBearer} theme={theme} />} />
+        <Route path="register" element={<Register theme={theme} />} />
         <Route
           path="dashboard"
           element={(
-            <PrivacyWrapper>
+            <PrivacyWrapper bearer={bearer}>
               <Dashboard />
             </PrivacyWrapper>
           )}
