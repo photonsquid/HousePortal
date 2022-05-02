@@ -1,0 +1,55 @@
+@import "./sass/pages/default";
+@import "./sass/pages/credentials";
+@import "./sass/pages/dashboard";
+@import "./sass/components/cards";
+@import "./sass/components/buttons";
+@import "./sass/components/theme-switcher";
+@import "./sass/components/spinner";
+@import "./sass/layout/basic";
+
+@import "./sass/themes/dark";
+@import "./sass/themes/light";
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-weight: 20;
+  font-family: "Google Sans", "Noto Sans Myanmar UI", arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ul {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+@mixin themable($theme-name, $theme-map) {
+  .#{$theme-name} {
+    h1 {
+      font-size: 2.2rem;
+      font-weight: inherit;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      color: map-get($theme-map, text-secondary);
+      font-weight: inherit;
+      margin: 0;
+    }
+  }
+}
+
+@include themable(light, $light);
+@include themable(dark, $dark);

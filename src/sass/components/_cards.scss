@@ -1,0 +1,88 @@
+@import "../themes/dark";
+@import "../themes/light";
+
+@mixin themable($theme-name, $theme-map) {
+  .#{$theme-name} {
+    .card {
+      background-color: map-get($theme-map, card-bg);
+      border: 1px solid map-get($theme-map, card-border);
+      border-radius: 10px;
+      padding: 40px;
+      width: fit-content;
+      height: fit-content;
+    }
+
+    .card-header {
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 40px;
+    }
+
+    .card-body {
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 1.2rem;
+    }
+
+    .card-footer {
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 40px;
+    }
+
+    .card-note {
+      font-size: 0.8rem;
+      width: 100%;
+      box-sizing: border-box;
+      color: map-get($theme-map, card-note-text);
+      margin: 20px 0;
+      border: 1px solid map-get($theme-map, card-note-border);
+      border-radius: 5px;
+      padding: 10px;
+      text-align: left;
+    }
+
+    .cn-warning {
+      background-color: adjust-color(
+        $color: map-get($theme-map, warning),
+        $alpha: -0.9
+      );
+      border-color: adjust-color(
+        $color: map-get($theme-map, warning),
+        $alpha: -0.3
+      );
+      color: map-get($theme-map, warning);
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+
+    .cn-error {
+      background-color: adjust-color(
+        $color: map-get($theme-map, error),
+        $alpha: -0.9
+      );
+      border-color: adjust-color(
+        $color: map-get($theme-map, error),
+        $alpha: -0.3
+      );
+      color: map-get($theme-map, error);
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+
+    .spacing-sm {
+      margin: 10px 0;
+    }
+
+    .spacing-md {
+      margin: 20px 0;
+    }
+
+    .spacing-lg {
+      margin: 30px 0;
+    }
+  }
+}
+
+@include themable(light, $light);
+@include themable(dark, $dark);

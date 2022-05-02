@@ -1,0 +1,29 @@
+@import "../themes/dark";
+@import "../themes/light";
+
+@mixin themable($theme-name, $theme-map) {
+  .#{$theme-name} {
+    .dashboard-wrapper {
+      background-color: map-get($theme-map, bg);
+      color: map-get($theme-map, text);
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .dashboard-header {
+      box-sizing: border-box;
+      width: 100%;
+      height: 80px;
+      border-bottom: 1px solid map-get($theme-map, card-border);
+      background-color: map-get($theme-map, card-bg);
+    }
+
+    .dahsboard-body {
+      box-sizing: border-box;
+      width: 100%;
+    }
+  }
+}
+
+@include themable(light, $light);
+@include themable(dark, $dark);
