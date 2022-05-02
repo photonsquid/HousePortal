@@ -89,7 +89,7 @@ export default function Register({ session, theme, toggleTheme }: RegisterProps)
   }
 
   useEffect(() => {
-    checkFormValidity(true);
+    checkFormValidity();
   }, [username, password, passwordRed, email]);
 
   return (

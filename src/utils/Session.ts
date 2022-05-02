@@ -5,10 +5,8 @@ export declare interface LoginData {
   password: string;
 }
 
-export declare interface AccountData {
+export declare interface AccountData extends LoginData {
   username: string,
-  email: string,
-  password: string
 }
 
 export default class Session {
