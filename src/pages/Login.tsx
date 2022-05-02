@@ -5,7 +5,6 @@ import ThirdPartyAuth from 'components/ThirdPartyAuth';
 import ThemeSwitcher from 'components/ThemeSwitcher';
 import { isDev } from 'App';
 import Session from 'utils/Session';
-import LoginFailureException from 'utils/LoginFailureException';
 
 export declare interface LoginProps {
   session: Session,

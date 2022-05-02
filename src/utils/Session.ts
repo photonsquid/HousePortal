@@ -1,5 +1,4 @@
 import { isDev } from 'App';
-import LoginFailureException from './LoginFailureException';
 
 export declare interface LoginData {
   email: string;
