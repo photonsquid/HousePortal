@@ -46,11 +46,11 @@ jobs:
 
       - name: Install dependencies from cache
         run: |
-          yarn install --prefer-offline --production
+          yarn install --prefer-offline
           
       - name: Install dependencies from repository
         run: |
-          yarn install --production
+          yarn install
       
       - name: Generate production build
         run: |
