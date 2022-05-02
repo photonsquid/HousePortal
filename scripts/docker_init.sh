@@ -1,2 +1,2 @@
 #!/bin/bash
-serve -n -s build -l 8080
+serve -n -s . -l 8080
