@@ -2,16 +2,16 @@ import React from 'react';
 
 import logo from 'assets/photonsquid.svg';
 
-export default function Default() {
+export default function Default({ theme }: {theme: string}) {
   return (
-    <div className="default-app">
-      <header className="default-app-header">
+    <div className={theme}>
+      <div className="default-app">
         <img src={logo} className="org-logo" alt="logo" />
         <p>
-          Sorry...
+          Woops...
           {' '}
           <br />
-          HousePortal isn&apos;t available yet
+          This page isn&apos;t available yet
         </p>
         <a
           className="default-app-link"
@@ -19,9 +19,9 @@ export default function Default() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          But you can follow us on GitHub
+          But you can follow us on GitHub while we work on it 😉
         </a>
-      </header>
+      </div>
     </div>
   );
 }

@@ -1,109 +1,116 @@
-.default-app {
-  text-align: center;
-  font-family: "Courier New", Courier, monospace;
+@import "../themes/dark";
+@import "../themes/light";
+
+@mixin themable($theme-name, $theme-map) {
+  .#{$theme-name} {
+    .default-app {
+      font-family: "Courier New", Courier, monospace;
+      background-color: map-get($theme-map, "bg");
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      font-size: calc(10px + 2vmin);
+      color: map-get($theme-map, "text");
+    }
+
+    .org-logo {
+      height: 40vmin;
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .org-logo {
+        animation: org-logo-oscillate alternate infinite 4s ease-in-out,
+          flicker 2s infinite linear;
+      }
+    }
+
+    .default-app-link {
+      color: map-get($theme-map, "error");
+      font-size: smaller;
+    }
+
+    @keyframes org-logo-oscillate {
+      0%,
+      100% {
+        transform: rotate(-2deg);
+      }
+      50% {
+        transform: rotate(2deg);
+      }
+    }
+
+    @keyframes flicker {
+      0% {
+        opacity: 0.1;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+
+      2% {
+        opacity: 1;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+      8% {
+        opacity: 0.1;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+      9% {
+        opacity: 1;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+      12% {
+        opacity: 0.1;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+      20% {
+        opacity: 1;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+      25% {
+        opacity: 0.3;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+      30% {
+        opacity: 1;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+
+      70% {
+        opacity: 0.7;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+
+      72% {
+        opacity: 0.2;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+
+      77% {
+        opacity: 0.9;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+      100% {
+        opacity: 0.9;
+        -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+        filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
+      }
+    }
+  }
 }
 
-.Org-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .Org-logo {
-    animation: Org-logo-oscillate alternate infinite 4s ease-in-out,
-      flicker 2s infinite linear;
-  }
-}
-
-.default-app-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.default-app-link {
-  color: #fb6661;
-  font-size: smaller;
-}
-
-@keyframes Org-logo-oscillate {
-  0%,
-  100% {
-    transform: rotate(-2deg);
-  }
-  50% {
-    transform: rotate(2deg);
-  }
-}
-
-@keyframes flicker {
-  0% {
-    opacity: 0.1;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-
-  2% {
-    opacity: 1;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-  8% {
-    opacity: 0.1;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-  9% {
-    opacity: 1;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-  12% {
-    opacity: 0.1;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-  20% {
-    opacity: 1;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-  25% {
-    opacity: 0.3;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-  30% {
-    opacity: 1;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-
-  70% {
-    opacity: 0.7;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-
-  72% {
-    opacity: 0.2;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-
-  77% {
-    opacity: 0.9;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-  100% {
-    opacity: 0.9;
-    -webkit-filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-    filter: drop-shadow(0px 0px 60px rgba(255, 166, 0, 0.719));
-  }
-}
+@include themable(light, $light);
+@include themable(dark, $dark);

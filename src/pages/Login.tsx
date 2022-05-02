@@ -80,7 +80,7 @@ export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.
             />
 
             <div className="settings-banner left-aligned">
-              <a href="htpps://example.com" className="password-retrieval">
+              <a href="/retrieve-password" className="password-retrieval">
                 Forgot password
               </a>
             </div>
