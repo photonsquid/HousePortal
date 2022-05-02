@@ -5,6 +5,7 @@ import ThirdPartyAuth from 'components/ThirdPartyAuth';
 import ThemeSwitcher from 'components/ThemeSwitcher';
 import { isDev } from 'App';
 import Session from 'utils/Session';
+import LoginFailureException from 'utils/LoginFailureException';
 
 export declare interface LoginProps {
   session: Session,
@@ -19,6 +20,8 @@ export declare interface LoginProps {
 export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.Element {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [error, setError] = React.useState('');
+
   const navigate = useNavigate();
 
   function handleInputChange(event: React.FormEvent<HTMLInputElement>) {
@@ -33,15 +36,15 @@ export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.
   }
 
   async function handleSubmit() {
-    if (isDev()) {
-      session.devlogin();
+    const loginSuccess = await (isDev() ? session.devlogin() : session.login({
+      email,
+      password,
+    }));
+    if (loginSuccess) {
+      navigate('/');
     } else {
-      session.login({
-        email,
-        password,
-      });
+      setError('Invalid email or password.');
     }
-    navigate('/');
   }
 
   function handleRegister() {
@@ -59,6 +62,7 @@ export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.
             <h2>with a HousePortal account</h2>
           </div>
           <div className="card-body centered-content">
+            {error && <div className="card-note spacing-sm cn-error">{error}</div>}
             <input
               type="text"
               id="email"

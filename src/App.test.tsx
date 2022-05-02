@@ -5,6 +5,6 @@ import App from 'App';
 
 test('renders app correctly', () => {
   render(<App />);
-  const linkElement = screen.getByText(/Loading/i);
+  const linkElement = screen.getByText(/Logging in/i);
   expect(linkElement).toBeInTheDocument();
 });

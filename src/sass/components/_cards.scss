@@ -24,6 +24,12 @@
       font-size: 1.2rem;
     }
 
+    .card-footer {
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 40px;
+    }
+
     .card-note {
       font-size: 0.8rem;
       width: 100%;
@@ -34,6 +40,46 @@
       border-radius: 5px;
       padding: 10px;
       text-align: left;
+    }
+
+    .cn-warning {
+      background-color: adjust-color(
+        $color: map-get($theme-map, warning),
+        $alpha: -0.9
+      );
+      border-color: adjust-color(
+        $color: map-get($theme-map, warning),
+        $alpha: -0.3
+      );
+      color: map-get($theme-map, warning);
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+
+    .cn-error {
+      background-color: adjust-color(
+        $color: map-get($theme-map, error),
+        $alpha: -0.9
+      );
+      border-color: adjust-color(
+        $color: map-get($theme-map, error),
+        $alpha: -0.3
+      );
+      color: map-get($theme-map, error);
+      font-size: 0.8rem;
+      margin-top: 10px;
+    }
+
+    .spacing-sm {
+      margin: 10px 0;
+    }
+
+    .spacing-md {
+      margin: 20px 0;
+    }
+
+    .spacing-lg {
+      margin: 30px 0;
     }
   }
 }
