@@ -14,7 +14,7 @@
 
 - ▶️ Run the container 
   ```
-  docker run -p 8080:[port] ghcr.io/photonsquid/houseportal:[tag]
+  docker run -d -p [port]:8080 ghcr.io/photonsquid/houseportal:[tag]
   ``` 
   where `[port]` is the 
   port you want to use for the web interface, and `[tag]` is the tag of the previously pulled image.
