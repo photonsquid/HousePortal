@@ -22,6 +22,7 @@ export default class Session {
    */
   async devlogin() {
     this.bearerToken = 'dev';
+
     return true;
   }
 

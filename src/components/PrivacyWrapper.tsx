@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Session from 'utils/Session';
-import Spinner from 'components/Spinner';
+import PageLoader from 'components/PageLoader';
 
 export declare interface PrivacyWrapperProps {
   children: React.ReactNode,
@@ -25,7 +25,7 @@ function PrivacyWrapper({ children, theme, session }: PrivacyWrapperProps): JSX.
   if (isLoading) {
     content = (
       <div className="loading-page-wrapper">
-        <Spinner message="Logging in" />
+        <PageLoader message="Logging in" />
       </div>
     );
   } else {

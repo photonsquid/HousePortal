@@ -5,6 +5,7 @@ import ThirdPartyAuth from 'components/ThirdPartyAuth';
 import ThemeSwitcher from 'components/ThemeSwitcher';
 import { isDev } from 'App';
 import Session from 'utils/Session';
+import Spinner from 'components/Spinner';
 
 export declare interface LoginProps {
   session: Session,
@@ -20,6 +21,7 @@ export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -35,15 +37,18 @@ export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.
   }
 
   async function handleSubmit() {
-    const loginSuccess = await (isDev() ? session.devlogin() : session.login({
+    setIsLoading(true);
+    (isDev() ? session.devlogin() : session.login({
       email,
       password,
-    }));
-    if (loginSuccess) {
-      navigate('/');
-    } else {
-      setError('Invalid email or password.');
-    }
+    })).then((loginSuccess) => {
+      setIsLoading(false);
+      if (loginSuccess) {
+        navigate('/');
+      } else {
+        setError('Invalid email or password.');
+      }
+    });
   }
 
   function handleRegister() {
@@ -56,7 +61,11 @@ export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.
       <div className="credentials-wrapper">
         <div className="card centered centered-content">
           <div className="card-header">
-            <img src={logo} className="org-logo-sm" alt="logo" />
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <img src={logo} className="org-logo-sm" alt="logo" />
+            )}
             <h1>Sign in</h1>
             <h2>with a HousePortal account</h2>
           </div>
