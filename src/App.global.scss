@@ -36,6 +36,10 @@ input:focus {
 
 @mixin themable($theme-name, $theme-map) {
   .#{$theme-name} {
+    body {
+      background-color: map-get($theme-map, bg);
+    }
+
     h1 {
       font-size: 2.2rem;
       font-weight: inherit;
@@ -43,6 +47,13 @@ input:focus {
     }
 
     h2 {
+      font-size: 1.8rem;
+      color: map-get($theme-map, text-secondary);
+      font-weight: inherit;
+      margin: 0;
+    }
+
+    h3 {
       font-size: 1.3rem;
       color: map-get($theme-map, text-secondary);
       font-weight: inherit;
