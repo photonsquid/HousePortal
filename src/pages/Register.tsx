@@ -93,72 +93,70 @@ export default function Register({ session, theme, toggleTheme }: RegisterProps)
   }, [username, password, passwordRed, email]);
 
   return (
-    <div className={theme}>
+    <div className="credentials-wrapper">
       <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
-      <div className="credentials-wrapper">
-        <div className="card centered centered-content">
-          <div className="card-header">
-            <h1>Sign up</h1>
-            <h2>create a HousePortal account</h2>
-          </div>
-          <div className="card-body centered-content">
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="Username"
-              required
-              onChange={handleInputChange}
-            />
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Email"
-              required
-              onChange={handleInputChange}
-              style={{ marginBottom: '2rem' }}
-            />
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              required
-              onChange={handleInputChange}
-            />
-            <input
-              type="password"
-              id="passwordRed"
-              name="passwordRed"
-              placeholder="Repeat password"
-              required
-              onChange={handleInputChange}
-            />
-            {errorStack.length > 0 && (
+      <div className="card centered centered-content">
+        <div className="card-header">
+          <h1>Sign up</h1>
+          <h3>create a HousePortal account</h3>
+        </div>
+        <div className="card-body centered-content">
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Username"
+            required
+            onChange={handleInputChange}
+          />
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+            onChange={handleInputChange}
+            style={{ marginBottom: '2rem' }}
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            required
+            onChange={handleInputChange}
+          />
+          <input
+            type="password"
+            id="passwordRed"
+            name="passwordRed"
+            placeholder="Repeat password"
+            required
+            onChange={handleInputChange}
+          />
+          {errorStack.length > 0 && (
             <div className="card-note spacing-sm cn-error">
               {errorStack.map((error) => (<div className="error-line" key={error}>{ error }</div>))}
             </div>
-            )}
-            <ThirdPartyAuth type="register" />
-            <div className="login-submit">
-              <button
-                type="button"
-                style={{ float: 'left' }}
-                className="standard-btn b-error b-shadow"
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="standard-btn b-primary b-shadow"
-                style={{ float: 'right' }}
-                onClick={handleSubmit}
-              >
-                Continue
-              </button>
-            </div>
+          )}
+          <ThirdPartyAuth type="register" />
+          <div className="login-submit">
+            <button
+              type="button"
+              style={{ float: 'left' }}
+              className="standard-btn b-error b-shadow"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="standard-btn b-primary b-shadow"
+              style={{ float: 'right' }}
+              onClick={handleSubmit}
+            >
+              Continue
+            </button>
           </div>
         </div>
       </div>

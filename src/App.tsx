@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter, Routes, Route, Navigate,
 } from 'react-router-dom';
@@ -29,9 +29,15 @@ function App(): JSX.Element {
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
+    document.getElementsByTagName('html')[0].className = newTheme;
     // save theme preference to local storage
     localStorage.setItem('theme', newTheme);
   };
+
+  // set theme on page load
+  useEffect(() => {
+    document.getElementsByTagName('html')[0].className = theme;
+  });
 
   return (
     <BrowserRouter>
@@ -43,8 +49,8 @@ function App(): JSX.Element {
         <Route
           path="dashboard"
           element={(
-            <PrivacyWrapper theme={theme} session={session}>
-              <Dashboard />
+            <PrivacyWrapper session={session} theme={theme}>
+              <Dashboard theme={theme} toggleTheme={toggleTheme} />
             </PrivacyWrapper>
           )}
         />

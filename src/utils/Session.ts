@@ -12,7 +12,7 @@ export declare interface AccountData extends LoginData {
 export default class Session {
   bearerToken = '';
 
-  apiUrl = '/api'; // temporary
+  apiUrl = 'https://randomapiurl.fr/'; // temporary
 
   /**
    * A function that logs in as a developer:
@@ -22,7 +22,6 @@ export default class Session {
    */
   async devlogin() {
     this.bearerToken = 'dev';
-
     return true;
   }
 
@@ -32,22 +31,20 @@ export default class Session {
    * @returns true if the login was successful, false otherwise
    */
   async login(credentials: LoginData) {
-    const response = await fetch(`${this.apiUrl}/login`, {
+    return fetch(`${this.apiUrl}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(credentials),
-    });
-
-    if (response.ok) {
-      this.bearerToken = await response.json();
-      // save the token to local storage
-      localStorage.setItem('bearerToken', this.bearerToken);
-      return true;
-    }
-    this.bearerToken = '';
-    return false;
+    }).then(async (response) => {
+      if (response.ok) {
+        this.bearerToken = await response.json();
+        localStorage.setItem('bearerToken', this.bearerToken);
+      }
+      this.bearerToken = response.ok ? this.bearerToken : '';
+      return response.ok;
+    }).catch(() => false);
   }
 
   /**
@@ -55,19 +52,19 @@ export default class Session {
    * @returns true if the logout was successful, false otherwise
    */
   async logout() {
-    const response = await fetch(`${this.apiUrl}/logout`, {
+    return fetch(`${this.apiUrl}/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.bearerToken}`,
       },
-    });
-    if (response.ok) {
-      this.bearerToken = '';
-      localStorage.removeItem('bearerToken');
-      return true;
-    }
-    return false;
+    }).then(async (response) => {
+      if (response.ok) {
+        this.bearerToken = '';
+        localStorage.removeItem('bearerToken');
+      }
+      return response.ok;
+    }).catch(() => false);
   }
 
   /**
@@ -79,20 +76,23 @@ export default class Session {
     const token = localStorage.getItem('bearerToken');
     if (token) {
       this.bearerToken = token;
-      return true;
     }
     if (this.bearerToken === '') {
       return false;
     }
-    const response = await fetch(`${this.apiUrl}/bearerTest`, {
+    return isDev() ? true : fetch(`${this.apiUrl}/bearerTest`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${this.bearerToken}`,
       },
-    });
-
-    return isDev() ? true : response.ok;
+    }).then(async (response) => {
+      if (response.ok) {
+        this.bearerToken = await response.json();
+        localStorage.setItem('bearerToken', this.bearerToken);
+      }
+      return response.ok;
+    }).catch(() => false);
   }
 
   /**
@@ -101,18 +101,18 @@ export default class Session {
    * @returns true if the registration was successful, false otherwise
    */
   async createUser(accountData: AccountData) {
-    const response = await fetch(`${this.apiUrl}/register`, {
-      method: 'POST',
+    return fetch(`${this.apiUrl}/register`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(accountData),
-    });
-    if (response.ok) {
-      this.bearerToken = await response.json();
-      localStorage.setItem('bearerToken', this.bearerToken);
-      return true;
-    }
-    return false;
+    }).then(async (response) => {
+      if (response.ok) {
+        this.bearerToken = await response.json();
+        localStorage.setItem('bearerToken', this.bearerToken);
+      }
+      return response.ok;
+    }).catch(() => false);
   }
 }

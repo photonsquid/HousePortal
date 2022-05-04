@@ -56,62 +56,60 @@ export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.
   }
 
   return (
-    <div className={theme}>
+    <div className="credentials-wrapper">
       <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
-      <div className="credentials-wrapper">
-        <div className="card centered centered-content">
-          <div className="card-header">
-            {isLoading ? (
-              <Spinner />
-            ) : (
-              <img src={logo} className="org-logo-sm" alt="logo" />
-            )}
-            <h1>Sign in</h1>
-            <h2>with a HousePortal account</h2>
-          </div>
-          <div className="card-body centered-content">
-            {error && <div className="card-note spacing-sm cn-error">{error}</div>}
-            <input
-              type="text"
-              id="email"
-              name="email"
-              placeholder="Email"
-              required
-              onChange={handleInputChange}
-            />
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="Password"
-              required
-              onChange={handleInputChange}
-            />
+      <div className="card centered centered-content">
+        <div className="card-header">
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <img src={logo} className="profile-pic-login" alt="logo" />
+          )}
+          <h1>Sign in</h1>
+          <h3>with a HousePortal account</h3>
+        </div>
+        <div className="card-body centered-content">
+          {error && <div className="card-note spacing-sm cn-error">{error}</div>}
+          <input
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Email"
+            required
+            onChange={handleInputChange}
+          />
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Password"
+            required
+            onChange={handleInputChange}
+          />
 
-            <div className="settings-banner left-aligned">
-              <a href="/retrieve-password" className="password-retrieval">
-                Forgot password
-              </a>
-            </div>
-            <ThirdPartyAuth type="login" />
-            <div className="login-submit">
-              <button
-                type="button"
-                style={{ float: 'left' }}
-                className="standard-btn b-secondary b-shadow"
-                onClick={handleRegister}
-              >
-                Create account
-              </button>
-              <button
-                type="submit"
-                className="standard-btn b-primary b-shadow"
-                style={{ float: 'right' }}
-                onClick={handleSubmit}
-              >
-                Continue
-              </button>
-            </div>
+          <div className="settings-banner left-aligned">
+            <a href="/retrieve-password" className="password-retrieval">
+              Forgot password
+            </a>
+          </div>
+          <ThirdPartyAuth type="login" />
+          <div className="login-submit">
+            <button
+              type="button"
+              style={{ float: 'left' }}
+              className="standard-btn b-secondary b-shadow"
+              onClick={handleRegister}
+            >
+              Create account
+            </button>
+            <button
+              type="submit"
+              className="standard-btn b-primary b-shadow"
+              style={{ float: 'right' }}
+              onClick={handleSubmit}
+            >
+              Continue
+            </button>
           </div>
         </div>
       </div>

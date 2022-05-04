@@ -6,10 +6,10 @@ import PageLoader from 'components/PageLoader';
 export declare interface PrivacyWrapperProps {
   children: React.ReactNode,
   session: Session,
-  theme?: string,
+  theme?: string
 }
 
-function PrivacyWrapper({ children, theme, session }: PrivacyWrapperProps): JSX.Element {
+function PrivacyWrapper({ children, session, theme }: PrivacyWrapperProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -24,8 +24,10 @@ function PrivacyWrapper({ children, theme, session }: PrivacyWrapperProps): JSX.
   let content;
   if (isLoading) {
     content = (
-      <div className="loading-page-wrapper">
-        <PageLoader message="Logging in" />
+      <div className={theme}>
+        <div className="loading-page-wrapper">
+          <PageLoader message="Logging in" />
+        </div>
       </div>
     );
   } else {
@@ -35,11 +37,7 @@ function PrivacyWrapper({ children, theme, session }: PrivacyWrapperProps): JSX.
       </div>
     );
   }
-  return (
-    <div className={theme}>
-      {content}
-    </div>
-  );
+  return content;
 }
 
 PrivacyWrapper.defaultProps = {
