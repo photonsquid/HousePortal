@@ -20,7 +20,7 @@ function PrivacyWrapper({ children, session, theme }: PrivacyWrapperProps): JSX.
     });
   }, [session]);
 
-  // display a spinner if the API request is still loading
+  // display a spinner if the request is still loading
   let content;
   if (isLoading) {
     content = (
