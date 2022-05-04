@@ -16,7 +16,7 @@ export default function Dashboard({ theme, toggleTheme }: DashboardProps): JSX.E
         <div className="dashboard-header">
           <div className="dashboard-header-section">
             <img src={logo} className="profile-pic-sm" alt="logo" style={{ margin: '0 10px' }} />
-            <h2>House portal</h2>
+            <h3>HousePortal</h3>
           </div>
           <div className="dashboard-header-section">
             <button
@@ -25,7 +25,12 @@ export default function Dashboard({ theme, toggleTheme }: DashboardProps): JSX.E
             >
               <strong>User settings</strong>
             </button>
-            <img src="https://avatars.githubusercontent.com/u/46868627?v=4" className="profile-pic-sm" alt="logo" style={{ margin: '0 10px' }} />
+            <button
+              type="button"
+              className="round-btn b-soft b-shadow"
+            >
+              <img src="https://avatars.githubusercontent.com/u/46868627?v=4" className="profile-pic-sm" alt="logo" style={{ margin: '0 10px' }} />
+            </button>
           </div>
         </div>
         <div className="dashboard-body">
@@ -34,8 +39,8 @@ export default function Dashboard({ theme, toggleTheme }: DashboardProps): JSX.E
             <h3>Welcome to your dashboard 👋</h3>
           </div>
           <div className="dashboard-card">
-            <h2>This is a dashboard card</h2>
-            <h3>And it&apos;s fucking useless</h3>
+            <h2>This could be a lamp</h2>
+            <h3>But it isn&apos;t so don&apos;t fucking click it you retard</h3>
           </div>
         </div>
       </div>
