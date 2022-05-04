@@ -16,14 +16,14 @@
       color: map-get($theme-map, "text");
     }
 
-    .org-logo {
+    .profile-pic {
       height: 40vmin;
       pointer-events: none;
     }
 
     @media (prefers-reduced-motion: no-preference) {
-      .org-logo {
-        animation: org-logo-oscillate alternate infinite 4s ease-in-out,
+      .profile-pic {
+        animation: profile-pic-oscillate alternate infinite 4s ease-in-out,
           flicker 2s infinite linear;
       }
     }
@@ -33,7 +33,7 @@
       font-size: smaller;
     }
 
-    @keyframes org-logo-oscillate {
+    @keyframes profile-pic-oscillate {
       0%,
       100% {
         transform: rotate(-2deg);

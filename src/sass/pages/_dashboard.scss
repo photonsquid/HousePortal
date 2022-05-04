@@ -13,14 +13,51 @@
     .dashboard-header {
       box-sizing: border-box;
       width: 100%;
-      height: 80px;
+      height: fit-content;
+      padding: 10px;
       border-bottom: 1px solid map-get($theme-map, card-border);
       background-color: map-get($theme-map, card-bg);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .dashboard-header-section {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
     }
 
     .dahsboard-body {
       box-sizing: border-box;
       width: 100%;
+    }
+
+    .dashboard-body-header {
+      box-sizing: border-box;
+      height: fit-content;
+      padding: 10px 20px 30px 20px;
+      margin: 10px;
+      border-bottom: 1px solid map-get($theme-map, card-border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dashboard-card {
+      box-sizing: border-box;
+      width: fit-content;
+      height: fit-content;
+      border-radius: 5px;
+      padding: 20px;
+      margin: 10px;
+      border: 1px solid map-get($theme-map, card-border);
+      background-color: map-get($theme-map, card-bg);
+    }
+
+    .profile-pic-sm {
+      height: 5vmin;
+      pointer-events: none;
+      border-radius: 50%;
     }
   }
 }
