@@ -26,6 +26,7 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      padding: 0 10px;
     }
 
     .dashboard-body {
@@ -58,8 +59,36 @@
       background-color: map-get($theme-map, card-bg);
     }
 
+    .dashboard-card-content {
+      box-sizing: border-box;
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+    }
+
+    .device-icon-wrapper {
+      color: map-get($theme-map, icons);
+    }
+
+    .device-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .device-description {
+      margin-bottom: 10px;
+    }
+
+    .device-thumbnail-wrapper {
+      max-width: 180px;
+    }
+
     .profile-pic-sm {
       height: 40px;
+      width: 40px;
       pointer-events: none;
       border-radius: 50%;
     }

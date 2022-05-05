@@ -1,4 +1,5 @@
 import { isDev } from 'App';
+import RemoteStorage from './RemoteStorage';
 
 export declare interface LoginData {
   email: string;
@@ -10,28 +11,26 @@ export declare interface AccountData extends LoginData {
 }
 
 export default class Session {
-  bearerToken = '';
+  static bearerToken = '';
 
-  apiUrl = 'https://randomapiurl.fr/'; // temporary
+  static apiUrl = 'https://randomapiurl.fr/'; // temporary
 
   /**
    * A function that logs in as a developer:
    * - no actual bearer token is generated
    * - all the data displayed in the UI is mocked
-   * @returns true if the login was successful, false otherwise
    */
-  async devlogin() {
-    this.bearerToken = 'dev';
-    return true;
+  static async devlogin() {
+    Session.bearerToken = 'dev';
+    localStorage.setItem('bearerToken', Session.bearerToken);
   }
 
   /**
    * A function that tries to log in the user with the given credentials.
    * @param credentials the credentials to use for the login
-   * @returns true if the login was successful, false otherwise
    */
-  async login(credentials: LoginData) {
-    return fetch(`${this.apiUrl}/login`, {
+  static async login(credentials: LoginData) {
+    fetch(`${Session.apiUrl}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,57 +38,62 @@ export default class Session {
       body: JSON.stringify(credentials),
     }).then(async (response) => {
       if (response.ok) {
-        this.bearerToken = await response.json();
-        localStorage.setItem('bearerToken', this.bearerToken);
+        Session.bearerToken = await response.json();
+        localStorage.setItem('bearerToken', Session.bearerToken);
       }
-      this.bearerToken = response.ok ? this.bearerToken : '';
-      return response.ok;
-    }).catch(() => false);
+      Session.bearerToken = response.ok ? Session.bearerToken : '';
+    });
   }
 
   /**
    * A function that logs out the user.
-   * @returns true if the logout was successful, false otherwise
    */
-  async logout() {
-    return fetch(`${this.apiUrl}/logout`, {
+  static async logout() {
+    // Dev logout
+    if (isDev()) {
+      Session.bearerToken = '';
+      localStorage.removeItem('bearerToken');
+      return;
+    }
+
+    // Real logout
+    fetch(`${Session.apiUrl}/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.bearerToken}`,
+        Authorization: `Bearer ${Session.bearerToken}`,
       },
     }).then(async (response) => {
       if (response.ok) {
-        this.bearerToken = '';
+        Session.bearerToken = '';
         localStorage.removeItem('bearerToken');
       }
-      return response.ok;
-    }).catch(() => false);
+    });
   }
 
   /**
    * A function that checks if the user is logged in.
    * @returns true if the user is logged in, false otherwise
    */
-  async isActive() {
+  static async isActive() {
     // check if the token is in local storage
     const token = localStorage.getItem('bearerToken');
     if (token) {
-      this.bearerToken = token;
+      Session.bearerToken = token;
     }
-    if (this.bearerToken === '') {
+    if (Session.bearerToken === '') {
       return false;
     }
-    return isDev() ? true : fetch(`${this.apiUrl}/bearerTest`, {
+    return isDev() ? true : fetch(`${Session.apiUrl}/bearerTest`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.bearerToken}`,
+        Authorization: `Bearer ${Session.bearerToken}`,
       },
     }).then(async (response) => {
       if (response.ok) {
-        this.bearerToken = await response.json();
-        localStorage.setItem('bearerToken', this.bearerToken);
+        Session.bearerToken = await response.json();
+        localStorage.setItem('bearerToken', Session.bearerToken);
       }
       return response.ok;
     }).catch(() => false);
@@ -98,10 +102,9 @@ export default class Session {
   /**
    * A function that registers a new user.
    * @param accountData the account data to use for the registration
-   * @returns true if the registration was successful, false otherwise
    */
-  async createUser(accountData: AccountData) {
-    return fetch(`${this.apiUrl}/register`, {
+  static async createUser(accountData: AccountData) {
+    fetch(`${Session.apiUrl}/register`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -109,10 +112,9 @@ export default class Session {
       body: JSON.stringify(accountData),
     }).then(async (response) => {
       if (response.ok) {
-        this.bearerToken = await response.json();
-        localStorage.setItem('bearerToken', this.bearerToken);
+        Session.bearerToken = await response.json();
+        localStorage.setItem('bearerToken', Session.bearerToken);
       }
-      return response.ok;
-    }).catch(() => false);
+    });
   }
 }

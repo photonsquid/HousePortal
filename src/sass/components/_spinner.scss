@@ -20,25 +20,22 @@
     }
 
     .spinner-message {
+      margin-top: 20px;
       font-size: 1.4rem;
-      margin-bottom: 20px;
     }
 
     // credit to loading.io for the spinner
 
     .lds-ring {
-      display: inline-block;
       position: relative;
-      width: 115px;
-      height: 115px;
+      width: 47px;
+      height: 47px;
     }
     .lds-ring div {
       box-sizing: border-box;
       position: absolute;
       width: 47px;
       height: 47px;
-      top: 25%;
-      left: 25%;
       border: 3px solid map-get($theme-map, icons);
       border-radius: 50%;
       animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;

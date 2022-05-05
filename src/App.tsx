@@ -43,13 +43,13 @@ function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="login" element={<Login session={session} theme={theme} toggleTheme={toggleTheme} />} />
-        <Route path="register" element={<Register session={session} theme={theme} toggleTheme={toggleTheme} />} />
+        <Route path="login" element={<Login theme={theme} toggleTheme={toggleTheme} />} />
+        <Route path="register" element={<Register theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="retrieve-password" element={<Default theme={theme} />} />
         <Route
           path="dashboard"
           element={(
-            <PrivacyWrapper session={session} theme={theme}>
+            <PrivacyWrapper>
               <Dashboard theme={theme} toggleTheme={toggleTheme} />
             </PrivacyWrapper>
           )}
