@@ -9,7 +9,7 @@ import Login from 'pages/Login';
 import Dashboard from 'pages/Dashboard';
 import PrivacyWrapper from 'components/PrivacyWrapper';
 import Register from 'pages/Register';
-import Session from 'utils/Session';
+import Settings from 'pages/Settings';
 
 /**
  *  A function that determines if the app is in development mode.
@@ -25,7 +25,6 @@ export function isDev(): boolean {
  */
 function App(): JSX.Element {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-  const session = new Session();
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
@@ -54,6 +53,17 @@ function App(): JSX.Element {
             </PrivacyWrapper>
           )}
         />
+        <Route path="settings">
+          <Route
+            path=":tabName"
+            element={(
+              <PrivacyWrapper>
+                <Settings />
+              </PrivacyWrapper>
+          )}
+          />
+          <Route index element={<Navigate to="General" />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

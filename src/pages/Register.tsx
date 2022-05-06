@@ -79,7 +79,7 @@ export default function Register({ theme, toggleTheme }: RegisterProps): JSX.Ele
       Session.createUser({
         username,
         email,
-        password,
+        pwd: password,
       }).then(() => {
         setIsLoading(false);
         navigate('/');

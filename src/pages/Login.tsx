@@ -39,7 +39,7 @@ export default function Login({ theme, toggleTheme }: LoginProps): JSX.Element {
     setIsLoading(true);
     (isDev() ? Session.devlogin() : Session.login({
       email,
-      password,
+      pwd: password,
     })).then(() => {
       setIsLoading(false);
       navigate('/');

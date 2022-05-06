@@ -2,12 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { FiEdit3 } from 'react-icons/fi';
-import { AiOutlineFork } from 'react-icons/ai';
+import { UserInfo } from 'utils/RemoteStorage';
 import { useNavigate } from 'react-router-dom';
-import Session from 'utils/Session';
-import RemoteStorage, { UserInfo } from 'utils/RemoteStorage';
 import Logout from './buttons/Logout';
-import Spinner from './loading/Spinner';
 
 export declare interface ProfileBadgeProps {
   visible: boolean,
@@ -20,6 +17,7 @@ export default function ProfileBadge({
 }: ProfileBadgeProps): JSX.Element {
   const [isButtonFocused, setIsButtonFocused] = useState(false);
   const [isCardFocused, setIsCardFocused] = useState(false);
+  const navigate = useNavigate();
   const onEscPress = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       setVisible(false);
@@ -66,6 +64,9 @@ export default function ProfileBadge({
           <button
             type="button"
             className="standard-btn b-soft"
+            onClick={() => {
+              navigate('/settings');
+            }}
           >
             <IoSettingsOutline size="1.5em" className="bcontrol-bar-icon btn-icon" />
           </button>

@@ -5,6 +5,8 @@
   .#{$theme-name} {
     .dashboard-wrapper {
       background-color: map-get($theme-map, bg);
+      transition: background-color 0.3s ease-in-out;
+      transition: all 0.3s ease-in-out;
       color: map-get($theme-map, text);
       width: 100vw;
       height: 100vh;
@@ -51,25 +53,45 @@
     .dashboard-card {
       box-sizing: border-box;
       width: fit-content;
+      min-width: 400px;
       height: fit-content;
       border-radius: 5px;
-      padding: 20px;
       margin: 10px;
       border: 1px solid map-get($theme-map, card-border);
       background-color: map-get($theme-map, card-bg);
+      display: flex;
+      flex-direction: row;
     }
 
     .dashboard-card-content {
       box-sizing: border-box;
+      margin: 20px;
       width: 100%;
+      max-width: 130px;
       height: fit-content;
       display: flex;
       flex-direction: column;
-      margin-top: 10px;
     }
 
     .device-icon-wrapper {
+      margin-bottom: 10px;
       color: map-get($theme-map, icons);
+    }
+
+    .device-details-wrapper {
+      position: relative;
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 20px 20px 20px 0px;
+    }
+
+    .device-controller {
+      position: absolute;
+      width: fit-content;
+      height: fit-content;
+      bottom: 20px;
+      right: 20px;
     }
 
     .device-list {

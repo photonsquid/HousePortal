@@ -1,0 +1,21 @@
+@import "../themes/dark";
+@import "../themes/light";
+
+@mixin themable($theme-name, $theme-map) {
+  .#{$theme-name} {
+    .text-success {
+      color: map-get($theme-map, success);
+    }
+
+    .text-warning {
+      color: map-get($theme-map, warning);
+    }
+
+    .text-error {
+      color: map-get($theme-map, error);
+    }
+  }
+}
+
+@include themable(light, $light);
+@include themable(dark, $dark);
