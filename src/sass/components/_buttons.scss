@@ -4,6 +4,9 @@
 @mixin themable($theme-name, $theme-map) {
   .#{$theme-name} {
     .standard-btn {
+      &:hover {
+        background-color: lighten(map-get($theme-map, btn-bg), 10%);
+      }
       background-color: map-get($theme-map, btn-bg);
       border: 1px solid map-get($theme-map, btn-border);
       color: map-get($theme-map, btn-text);
@@ -69,6 +72,20 @@
 
     .b-shadow:hover {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .circle-btn {
+      &:hover {
+        border: 1px solid map-get($theme-map, btn-border);
+      }
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0);
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .btn-icon {
+      display: block;
     }
   }
 }

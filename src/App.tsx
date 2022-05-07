@@ -9,7 +9,7 @@ import Login from 'pages/Login';
 import Dashboard from 'pages/Dashboard';
 import PrivacyWrapper from 'components/PrivacyWrapper';
 import Register from 'pages/Register';
-import Session from 'utils/Session';
+import Settings from 'pages/Settings';
 
 /**
  *  A function that determines if the app is in development mode.
@@ -25,7 +25,6 @@ export function isDev(): boolean {
  */
 function App(): JSX.Element {
   const [theme, setTheme] = useState(localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-  const session = new Session();
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
@@ -43,17 +42,28 @@ function App(): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="login" element={<Login session={session} theme={theme} toggleTheme={toggleTheme} />} />
-        <Route path="register" element={<Register session={session} theme={theme} toggleTheme={toggleTheme} />} />
+        <Route path="login" element={<Login theme={theme} toggleTheme={toggleTheme} />} />
+        <Route path="register" element={<Register theme={theme} toggleTheme={toggleTheme} />} />
         <Route path="retrieve-password" element={<Default theme={theme} />} />
         <Route
           path="dashboard"
           element={(
-            <PrivacyWrapper session={session} theme={theme}>
+            <PrivacyWrapper>
               <Dashboard theme={theme} toggleTheme={toggleTheme} />
             </PrivacyWrapper>
           )}
         />
+        <Route path="settings">
+          <Route
+            path=":tabName"
+            element={(
+              <PrivacyWrapper>
+                <Settings theme={theme} toggleTheme={toggleTheme} />
+              </PrivacyWrapper>
+          )}
+          />
+          <Route index element={<Navigate to="General" />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

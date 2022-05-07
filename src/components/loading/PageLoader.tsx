@@ -7,7 +7,7 @@ import Spinner from './Spinner';
  */
 export default function PageLoader({ message }: {message?: string}): JSX.Element {
   return (
-    <div className="spinner-wrapper">
+    <div className="page-loader centered centered-content">
       <Spinner />
       <div className="spinner-message">
         {message}

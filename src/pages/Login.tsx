@@ -5,10 +5,9 @@ import ThirdPartyAuth from 'components/ThirdPartyAuth';
 import ThemeSwitcher from 'components/ThemeSwitcher';
 import { isDev } from 'App';
 import Session from 'utils/Session';
-import Spinner from 'components/Spinner';
+import Spinner from 'components/loading/Spinner';
 
 export declare interface LoginProps {
-  session: Session,
   theme?: string
   toggleTheme?: () => void
 }
@@ -17,7 +16,7 @@ export declare interface LoginProps {
  * A page that allows a user to log in.
  * @returns {JSX.Element}
  */
-export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.Element {
+export default function Login({ theme, toggleTheme }: LoginProps): JSX.Element {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
@@ -38,16 +37,15 @@ export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.
 
   async function handleSubmit() {
     setIsLoading(true);
-    (isDev() ? session.devlogin() : session.login({
+    (isDev() ? Session.devlogin() : Session.login({
       email,
-      password,
-    })).then((loginSuccess) => {
+      pwd: password,
+    })).then(() => {
       setIsLoading(false);
-      if (loginSuccess) {
-        navigate('/');
-      } else {
-        setError('Invalid email or password.');
-      }
+      navigate('/');
+    }).catch(() => {
+      setIsLoading(false);
+      setError('Invalid email or password.');
     });
   }
 
@@ -59,14 +57,16 @@ export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.
     <div className="credentials-wrapper">
       <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
       <div className="card centered centered-content">
-        <div className="card-header">
+        <div className="card-header centered-content">
           {isLoading ? (
-            <Spinner />
+            <div className="login-loading-wrapper centered-content">
+              <Spinner />
+            </div>
           ) : (
             <img src={logo} className="profile-pic-login" alt="logo" />
           )}
           <h1>Sign in</h1>
-          <h3>with a HousePortal account</h3>
+          <h3 className="text-secondary">with a HousePortal account</h3>
         </div>
         <div className="card-body centered-content">
           {error && <div className="card-note spacing-sm cn-error">{error}</div>}
@@ -96,16 +96,14 @@ export default function Login({ session, theme, toggleTheme }: LoginProps): JSX.
           <div className="login-submit">
             <button
               type="button"
-              style={{ float: 'left' }}
-              className="standard-btn b-secondary b-shadow"
+              className="standard-btn b-secondary b-shadow left-float"
               onClick={handleRegister}
             >
               Create account
             </button>
             <button
               type="submit"
-              className="standard-btn b-primary b-shadow"
-              style={{ float: 'right' }}
+              className="standard-btn b-primary b-shadow right-float"
               onClick={handleSubmit}
             >
               Continue

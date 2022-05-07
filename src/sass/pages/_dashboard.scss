@@ -3,39 +3,14 @@
 
 @mixin themable($theme-name, $theme-map) {
   .#{$theme-name} {
-    .dashboard-wrapper {
-      background-color: map-get($theme-map, bg);
-      color: map-get($theme-map, text);
-      width: 100vw;
-      height: 100vh;
-    }
-
-    .dashboard-header {
-      box-sizing: border-box;
-      width: 100%;
-      height: fit-content;
-      padding: 10px;
-      border-bottom: 1px solid map-get($theme-map, card-border);
-      background-color: map-get($theme-map, card-bg);
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-
-    .dashboard-header-section {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-
-    .dashboard-body {
+    .dashboard {
       box-sizing: border-box;
       width: 100%;
       height: auto;
       padding: 30px;
     }
 
-    .dashboard-body-header {
+    .dashboard-header {
       box-sizing: border-box;
       height: fit-content;
       padding: 20px;
@@ -50,16 +25,64 @@
     .dashboard-card {
       box-sizing: border-box;
       width: fit-content;
+      min-width: 400px;
       height: fit-content;
       border-radius: 5px;
-      padding: 20px;
       margin: 10px;
       border: 1px solid map-get($theme-map, card-border);
       background-color: map-get($theme-map, card-bg);
+      display: flex;
+      flex-direction: row;
+    }
+
+    .dashboard-card-content {
+      box-sizing: border-box;
+      margin: 20px;
+      width: 100%;
+      max-width: 130px;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .device-icon-wrapper {
+      margin-bottom: 10px;
+      color: map-get($theme-map, icons);
+    }
+
+    .device-details-wrapper {
+      position: relative;
+      display: block;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 20px 20px 20px 0px;
+    }
+
+    .device-controller {
+      position: absolute;
+      width: fit-content;
+      height: fit-content;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .device-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .device-description {
+      margin-bottom: 10px;
+    }
+
+    .device-thumbnail-wrapper {
+      max-width: 180px;
     }
 
     .profile-pic-sm {
       height: 40px;
+      width: 40px;
       pointer-events: none;
       border-radius: 50%;
     }

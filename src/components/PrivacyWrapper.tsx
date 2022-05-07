@@ -1,33 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import Session from 'utils/Session';
-import PageLoader from 'components/PageLoader';
+import PageLoader from 'components/loading/PageLoader';
 
 export declare interface PrivacyWrapperProps {
   children: React.ReactNode,
-  session: Session,
-  theme?: string
 }
 
-function PrivacyWrapper({ children, session, theme }: PrivacyWrapperProps): JSX.Element {
+function PrivacyWrapper({ children }: PrivacyWrapperProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    session.isActive().then((isActive) => {
+    Session.isActive().then((isActive) => {
       setIsLoading(false);
       setIsLoggedIn(isActive);
     });
-  }, [session]);
+  });
 
   // display a spinner if the request is still loading
   let content;
   if (isLoading) {
     content = (
-      <div className={theme}>
-        <div className="loading-page-wrapper">
-          <PageLoader message="Logging in" />
-        </div>
+      <div className="loading-page-wrapper">
+        <PageLoader message="Logging in" />
       </div>
     );
   } else {
@@ -39,9 +35,5 @@ function PrivacyWrapper({ children, session, theme }: PrivacyWrapperProps): JSX.
   }
   return content;
 }
-
-PrivacyWrapper.defaultProps = {
-  theme: 'light',
-};
 
 export default PrivacyWrapper;

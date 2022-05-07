@@ -7,7 +7,6 @@ import Session from 'utils/Session';
 import SpellCheck, { ContentType } from 'utils/SpellCheck';
 
 export declare interface RegisterProps {
-  session: Session,
   theme?: string,
   toggleTheme?: () => void
 }
@@ -16,12 +15,13 @@ export declare interface RegisterProps {
  * A page that allows a user to create an account.
  * @returns {JSX.Element}
  */
-export default function Register({ session, theme, toggleTheme }: RegisterProps): JSX.Element {
+export default function Register({ theme, toggleTheme }: RegisterProps): JSX.Element {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [passwordRed, setPasswordRed] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [errorStack, setErrorStack] = React.useState<string[]>([]);
+  const [isLoading, setIsLoading] = React.useState(false);
   const navigate = useNavigate();
 
   function checkFormValidity(final = false): boolean {
@@ -75,16 +75,18 @@ export default function Register({ session, theme, toggleTheme }: RegisterProps)
 
   async function handleSubmit() {
     if (checkFormValidity(true)) {
-      const success = await session.createUser({
+      setIsLoading(true);
+      Session.createUser({
         username,
         email,
-        password,
-      });
-      if (success) {
+        pwd: password,
+      }).then(() => {
+        setIsLoading(false);
         navigate('/');
-      } else {
-        setErrorStack(['Failed to create new user.']);
-      }
+      }).catch((err) => {
+        setIsLoading(false);
+        setErrorStack([err.message]);
+      });
     }
   }
 
@@ -98,7 +100,7 @@ export default function Register({ session, theme, toggleTheme }: RegisterProps)
       <div className="card centered centered-content">
         <div className="card-header">
           <h1>Sign up</h1>
-          <h3>create a HousePortal account</h3>
+          <h3 className="text-secondary">create a HousePortal account</h3>
         </div>
         <div className="card-body centered-content">
           <input
@@ -155,7 +157,7 @@ export default function Register({ session, theme, toggleTheme }: RegisterProps)
               style={{ float: 'right' }}
               onClick={handleSubmit}
             >
-              Continue
+              {isLoading ? 'Loading...' : 'Continue'}
             </button>
           </div>
         </div>

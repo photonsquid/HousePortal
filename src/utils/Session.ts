@@ -2,7 +2,7 @@ import { isDev } from 'App';
 
 export declare interface LoginData {
   email: string;
-  password: string;
+  pwd: string;
 }
 
 export declare interface AccountData extends LoginData {
@@ -10,28 +10,51 @@ export declare interface AccountData extends LoginData {
 }
 
 export default class Session {
-  bearerToken = '';
+  static bearer = '';
 
-  apiUrl = 'https://randomapiurl.fr/'; // temporary
+  static userToken = '';
+
+  static apiUrl = 'https://randomapiurl.fr'; // temporary
+
+  /**
+   * A function that requests a new bearer token.
+   * Should be called when the user's session has expired.
+   */
+  private static async fetchBearer() {
+    return fetch(`${Session.apiUrl}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        token: Session.userToken,
+      }),
+    }).then(async (response) => {
+      if (response.ok) {
+        Session.bearer = await response.json().then((data) => data.bearer);
+        localStorage.setItem('bearer', Session.bearer);
+      }
+    });
+  }
 
   /**
    * A function that logs in as a developer:
    * - no actual bearer token is generated
    * - all the data displayed in the UI is mocked
-   * @returns true if the login was successful, false otherwise
    */
-  async devlogin() {
-    this.bearerToken = 'dev';
-    return true;
+  static async devlogin() {
+    Session.bearer = 'devBearer';
+    Session.userToken = 'devToken';
+    localStorage.setItem('bearer', Session.bearer);
+    localStorage.setItem('userToken', Session.userToken);
   }
 
   /**
    * A function that tries to log in the user with the given credentials.
    * @param credentials the credentials to use for the login
-   * @returns true if the login was successful, false otherwise
    */
-  async login(credentials: LoginData) {
-    return fetch(`${this.apiUrl}/login`, {
+  static async login(credentials: LoginData) {
+    return fetch(`${Session.apiUrl}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,69 +62,70 @@ export default class Session {
       body: JSON.stringify(credentials),
     }).then(async (response) => {
       if (response.ok) {
-        this.bearerToken = await response.json();
-        localStorage.setItem('bearerToken', this.bearerToken);
+        [Session.bearer, Session.userToken] = await response.json().then(
+          (data) => [data.bearer, data.token],
+        );
+        localStorage.setItem('bearer', Session.bearer);
+        localStorage.setItem('userToken', Session.userToken);
+      } else {
+        Session.bearer = '';
+        Session.userToken = '';
       }
-      this.bearerToken = response.ok ? this.bearerToken : '';
-      return response.ok;
-    }).catch(() => false);
+    });
   }
 
   /**
    * A function that logs out the user.
-   * @returns true if the logout was successful, false otherwise
    */
-  async logout() {
-    return fetch(`${this.apiUrl}/logout`, {
+  static async logout() {
+    // Dev logout
+    if (isDev()) {
+      Session.bearer = '';
+      localStorage.removeItem('bearer');
+      localStorage.removeItem('userToken');
+      return Promise.resolve();
+    }
+
+    // Real logout
+    return fetch(`${Session.apiUrl}/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.bearerToken}`,
+        Authorization: `Bearer ${Session.bearer}`,
       },
-    }).then(async (response) => {
-      if (response.ok) {
-        this.bearerToken = '';
-        localStorage.removeItem('bearerToken');
-      }
-      return response.ok;
-    }).catch(() => false);
+    }).then(async () => {
+      // the response doesn't matter, either the server deprecates
+      // the bearer token or it has already been invalidated in the past
+      Session.bearer = '';
+      Session.userToken = '';
+      localStorage.removeItem('bearer');
+      localStorage.removeItem('userToken');
+    });
   }
 
   /**
    * A function that checks if the user is logged in.
    * @returns true if the user is logged in, false otherwise
    */
-  async isActive() {
-    // check if the token is in local storage
-    const token = localStorage.getItem('bearerToken');
-    if (token) {
-      this.bearerToken = token;
-    }
-    if (this.bearerToken === '') {
-      return false;
-    }
-    return isDev() ? true : fetch(`${this.apiUrl}/bearerTest`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.bearerToken}`,
-      },
-    }).then(async (response) => {
-      if (response.ok) {
-        this.bearerToken = await response.json();
-        localStorage.setItem('bearerToken', this.bearerToken);
+  static async isActive() {
+    const bearer = localStorage.getItem('bearer');
+    const userToken = localStorage.getItem('userToken');
+    if (userToken && userToken.length > 0) {
+      Session.userToken = userToken;
+      if (bearer && bearer.length > 0) {
+        Session.bearer = bearer;
       }
-      return response.ok;
-    }).catch(() => false);
+      return true;
+    }
+    return false;
   }
 
   /**
    * A function that registers a new user.
    * @param accountData the account data to use for the registration
-   * @returns true if the registration was successful, false otherwise
    */
-  async createUser(accountData: AccountData) {
-    return fetch(`${this.apiUrl}/register`, {
+  static async createUser(accountData: AccountData) {
+    return fetch(`${Session.apiUrl}/register`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -109,10 +133,12 @@ export default class Session {
       body: JSON.stringify(accountData),
     }).then(async (response) => {
       if (response.ok) {
-        this.bearerToken = await response.json();
-        localStorage.setItem('bearerToken', this.bearerToken);
+        [Session.bearer, Session.userToken] = await response.json().then(
+          (data) => [data.bearer, data.token],
+        );
+        localStorage.setItem('bearer', Session.bearer);
+        localStorage.setItem('userToken', Session.userToken);
       }
-      return response.ok;
-    }).catch(() => false);
+    });
   }
 }
