@@ -24,7 +24,7 @@ export default function TabView({ tabs, current }: TabViewProps) {
             onClick={() => {
               navigate(`/settings/${tab.name}`);
             }}
-            className={`tab-link standard-btn ${current === tab.name ? 'b-primary' : 'b-soft'} b-shadow`}
+            className={`tab-link ${current === tab.name ? 'tl-enabled' : 'tl-disabled'}`}
             key={tab.name}
           >
             {tab.name}

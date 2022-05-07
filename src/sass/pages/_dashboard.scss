@@ -3,42 +3,14 @@
 
 @mixin themable($theme-name, $theme-map) {
   .#{$theme-name} {
-    .dashboard-wrapper {
-      background-color: map-get($theme-map, bg);
-      transition: background-color 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-      color: map-get($theme-map, text);
-      width: 100vw;
-      height: 100vh;
-    }
-
-    .dashboard-header {
-      box-sizing: border-box;
-      width: 100%;
-      height: fit-content;
-      padding: 10px;
-      border-bottom: 1px solid map-get($theme-map, card-border);
-      background-color: map-get($theme-map, card-bg);
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-
-    .dashboard-header-section {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 0 10px;
-    }
-
-    .dashboard-body {
+    .dashboard {
       box-sizing: border-box;
       width: 100%;
       height: auto;
       padding: 30px;
     }
 
-    .dashboard-body-header {
+    .dashboard-header {
       box-sizing: border-box;
       height: fit-content;
       padding: 20px;

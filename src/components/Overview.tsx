@@ -1,17 +1,17 @@
 import React from 'react';
 import { GoLightBulb } from 'react-icons/go';
 import { GiCrosshair } from 'react-icons/gi';
-import { UserInfo } from 'utils/RemoteStorage';
+import RemoteStorage from 'utils/RemoteStorage';
 import Device from './Device';
 
-export default function Overview({ userInfo }: {userInfo: UserInfo}): JSX.Element {
+export default function Overview(): JSX.Element {
   return (
-    <div className="dashboard-body">
-      <div className="dashboard-body-header">
+    <div className="dashboard">
+      <div className="dashboard-header">
         <h1>
           Hello,
           {' '}
-          {userInfo.name.first}
+          {RemoteStorage.getUserInfo().name.first}
         </h1>
         <h3>Welcome to your dashboard 👋</h3>
       </div>

@@ -26,6 +26,32 @@
     .tab-link {
       margin: 5px;
     }
+
+    .tl-enabled,
+    .tl-disabled {
+      &:hover {
+        background-color: darken(map-get($theme-map, bg), 10%);
+      }
+      font-size: 14px;
+      font-weight: 400;
+      color: map-get($theme-map, btn-text);
+      background-color: rgba(0, 0, 0, 0);
+      border: 1px solid rgba(0, 0, 0, 0);
+      border-radius: 5px;
+      padding: 5px 10px;
+      margin: 0;
+      color: map-get($theme-map, btn-secondary-text);
+      cursor: pointer;
+    }
+
+    .tl-enabled {
+      &:hover {
+        background-color: lighten(map-get($theme-map, btn-primary-bg), 10%);
+        color: #fff;
+      }
+      background-color: map-get($theme-map, btn-primary-bg);
+      color: map-get($theme-map, btn-primary-text);
+    }
   }
 }
 

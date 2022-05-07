@@ -58,7 +58,7 @@ function App(): JSX.Element {
             path=":tabName"
             element={(
               <PrivacyWrapper>
-                <Settings />
+                <Settings theme={theme} toggleTheme={toggleTheme} />
               </PrivacyWrapper>
           )}
           />
