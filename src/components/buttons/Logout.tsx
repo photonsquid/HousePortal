@@ -1,5 +1,4 @@
-import PageLoader from 'components/loading/PageLoader';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { AiOutlineLogout, AiOutlineClockCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import Session from 'utils/Session';
