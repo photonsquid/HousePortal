@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import RemoteStorage, { UserInfo } from 'utils/RemoteStorage';
 import logo from 'assets/photonsquid.svg';
+import { useNavigate } from 'react-router-dom';
 import PageLoader from './loading/PageLoader';
 import ProfileBadge from './ProfileBadge';
 import ThemeSwitcher from './ThemeSwitcher';
@@ -23,6 +24,7 @@ export default function MainInterface(
 ): JSX.Element {
   const [profileCardVisible, setProfileCardVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   // fetch user info
   useEffect(() => {
@@ -41,13 +43,19 @@ export default function MainInterface(
           theme={theme}
           toggleTheme={toggleTheme}
         />
-        <div className="main-interface-header">
-          <div className="main-interface-header-section">
-            <a href="/">
+        <header role="banner">
+          <button
+            type="button"
+            className="undecorated-btn"
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            <div className="main-interface-header-section">
               <img src={logo} className="profile-pic-sm" alt="logo" />
-            </a>
-            <h3>&nbsp;HousePortal</h3>
-          </div>
+              <h3>&nbsp;HousePortal</h3>
+            </div>
+          </button>
           <div className="main-interface-header-section">
             <ProfileBadge
               visible={profileCardVisible}
@@ -55,7 +63,7 @@ export default function MainInterface(
               userInfo={RemoteStorage.getUserInfo()}
             />
           </div>
-        </div>
+        </header>
         {children}
       </div>
     )

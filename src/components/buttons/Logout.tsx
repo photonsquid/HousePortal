@@ -10,7 +10,7 @@ export default function Logout() {
   return (
     <button
       type="button"
-      className="standard-btn b-soft"
+      className="standard-btn soft"
       onClick={() => {
         setIsLoading(true);
         Session.logout().then(() => {

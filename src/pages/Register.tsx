@@ -146,14 +146,14 @@ export default function Register({ theme, toggleTheme }: RegisterProps): JSX.Ele
             <button
               type="button"
               style={{ float: 'left' }}
-              className="standard-btn b-error b-shadow"
+              className="standard-btn error shadow"
               onClick={handleCancel}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="standard-btn b-primary b-shadow"
+              className="standard-btn primary shadow"
               style={{ float: 'right' }}
               onClick={handleSubmit}
             >

@@ -9,7 +9,7 @@ import Login from 'pages/Login';
 import Dashboard from 'pages/Dashboard';
 import PrivacyWrapper from 'components/PrivacyWrapper';
 import Register from 'pages/Register';
-import Settings from 'pages/Settings';
+import Settings, { SettingsBody } from 'pages/Settings';
 
 /**
  * A function that determines if the app is in development mode.
@@ -55,14 +55,14 @@ function App(): JSX.Element {
         />
         <Route path="settings">
           <Route
-            path=":tabName"
+            path=":tabUrl"
             element={(
               <PrivacyWrapper>
                 <Settings theme={theme} toggleTheme={toggleTheme} />
               </PrivacyWrapper>
           )}
           />
-          <Route index element={<Navigate to="General" />} />
+          <Route index element={<Navigate to={SettingsBody.content[0].tabs[0].url} />} />
         </Route>
       </Routes>
     </BrowserRouter>

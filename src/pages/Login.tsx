@@ -96,14 +96,14 @@ export default function Login({ theme, toggleTheme }: LoginProps): JSX.Element {
           <div className="login-submit">
             <button
               type="button"
-              className="standard-btn b-secondary b-shadow left-float"
+              className="standard-btn secondary shadow left-float"
               onClick={handleRegister}
             >
               Create account
             </button>
             <button
               type="submit"
-              className="standard-btn b-primary b-shadow right-float"
+              className="standard-btn primary shadow right-float"
               onClick={handleSubmit}
             >
               Continue

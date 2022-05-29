@@ -45,7 +45,7 @@ export default function ProfileBadge({
     <div className="profile-badge-wrapper">
       <button
         type="button"
-        className="circle-btn b-soft b-shadow"
+        className="circle-btn soft shadow"
         onFocus={() => { setIsButtonFocused(true); }}
         onBlur={() => { setIsButtonFocused(false); }}
       >
@@ -63,7 +63,7 @@ export default function ProfileBadge({
         <div className="profile-card-body">
           <button
             type="button"
-            className="standard-btn b-soft"
+            className="standard-btn soft"
             onClick={() => {
               navigate('/settings');
             }}
@@ -72,7 +72,7 @@ export default function ProfileBadge({
           </button>
           <button
             type="button"
-            className="standard-btn b-soft"
+            className="standard-btn soft"
           >
             <FiEdit3 size="1.5em" className="bcontrol-bar-icon btn-icon" />
           </button>
