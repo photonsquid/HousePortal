@@ -5,9 +5,18 @@
   .#{$theme-name} {
     .main-interface-wrapper {
       background-color: map-get($theme-map, bg);
+      -webkit-transition: background-color 0.3s ease-in-out;
+      -moz-transition: background-color 0.3s ease-in-out;
+      -ms-transition: background-color 0.3s ease-in-out;
+      -o-transition: background-color 0.3s ease-in-out;
       transition: background-color 0.3s ease-in-out;
+      -webkit-transition: all 0.3s ease-in-out;
+      -moz-transition: all 0.3s ease-in-out;
+      -ms-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
       transition: all 0.3s ease-in-out;
       color: map-get($theme-map, text);
+      box-sizing: border-box;
       width: 100vw;
       height: 100vh;
     }

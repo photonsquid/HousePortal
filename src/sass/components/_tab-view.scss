@@ -6,10 +6,12 @@
     .tab-view {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
+      column-gap: 40px;
+      row-gap: 40px;
+      padding: var(--Layout-gutter);
       box-sizing: border-box;
       width: 100%;
-      height: 100%;
-      padding: 100px 60px;
     }
 
     .tab-list {
@@ -17,40 +19,46 @@
       height: 100%;
       display: flex;
       flex-direction: column;
+      list-style: none;
+      margin-left: 0;
     }
 
     .tab-content {
-      margin-left: 20px;
+      margin-left: 0;
     }
 
-    .tab-link {
-      margin: 5px;
-    }
-
-    .tl-enabled,
-    .tl-disabled {
-      &:hover {
-        background-color: darken(map-get($theme-map, bg), 10%);
+    .tab {
+      &.enabled {
+        &::after {
+          position: absolute;
+          top: calc(50% - 12px);
+          left: -8px;
+          width: 4px;
+          height: 24px;
+          content: "";
+          background: map-get($theme-map, input-focus-outline);
+          border-radius: 6px;
+        }
+        background-color: map-get($theme-map, li-active);
+      }
+      &:hover.disabled {
+        background-color: map-get($theme-map, li-hovered);
       }
       font-size: 14px;
       font-weight: 400;
       color: map-get($theme-map, btn-text);
       background-color: rgba(0, 0, 0, 0);
       border: 1px solid rgba(0, 0, 0, 0);
-      border-radius: 5px;
-      padding: 5px 10px;
+      border-radius: 6px;
       margin: 0;
       color: map-get($theme-map, btn-secondary-text);
+      position: relative;
+      padding: 7px 11px;
+      text-align: start;
+      align-items: center;
+      display: flex;
+      column-gap: 10px;
       cursor: pointer;
-    }
-
-    .tl-enabled {
-      &:hover {
-        background-color: lighten(map-get($theme-map, btn-primary-bg), 10%);
-        color: #fff;
-      }
-      background-color: map-get($theme-map, btn-primary-bg);
-      color: map-get($theme-map, btn-primary-text);
     }
   }
 }

@@ -12,7 +12,7 @@ import Register from 'pages/Register';
 import Settings from 'pages/Settings';
 
 /**
- *  A function that determines if the app is in development mode.
+ * A function that determines if the app is in development mode.
  * @returns {boolean} true if the user is logged in
  */
 export function isDev(): boolean {

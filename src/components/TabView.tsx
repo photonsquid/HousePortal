@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export declare interface Tab {
   name: string,
   description?: string,
+  icon?: JSX.Element,
   content: JSX.Element
 }
 
@@ -24,9 +25,10 @@ export default function TabView({ tabs, current }: TabViewProps) {
             onClick={() => {
               navigate(`/settings/${tab.name}`);
             }}
-            className={`tab-link ${current === tab.name ? 'tl-enabled' : 'tl-disabled'}`}
+            className={`tab ${current === tab.name ? 'enabled' : 'disabled'}`}
             key={tab.name}
           >
+            {tab.icon}
             {tab.name}
           </button>
         ))}
