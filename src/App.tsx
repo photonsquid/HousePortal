@@ -62,7 +62,7 @@ function App(): JSX.Element {
               </PrivacyWrapper>
           )}
           />
-          <Route index element={<Navigate to={SettingsBody.content[0].tabs[0].url} />} />
+          <Route index element={<Navigate to={SettingsBody.jsonContent[0].tabs[0].url} />} />
         </Route>
       </Routes>
     </BrowserRouter>

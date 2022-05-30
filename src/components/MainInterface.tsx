@@ -64,7 +64,9 @@ export default function MainInterface(
             />
           </div>
         </header>
-        {children}
+        <div className="main-interface-content">
+          {children}
+        </div>
       </div>
     )
   );

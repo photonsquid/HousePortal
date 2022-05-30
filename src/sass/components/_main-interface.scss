@@ -22,7 +22,7 @@
       }
       box-sizing: border-box;
       width: 100%;
-      height: fit-content;
+      height: var(--Header-height);
       padding: 10px;
       border-bottom: 1px solid map-get($theme-map, zone-separator);
       background-color: map-get($theme-map, card-bg);
@@ -38,6 +38,13 @@
       flex-direction: row;
       align-items: center;
       padding: 0 10px;
+    }
+
+    .main-interface-content {
+      overflow: auto;
+      box-sizing: border-box;
+      width: 100%;
+      height: calc(100% - var(--Header-height));
     }
   }
 }

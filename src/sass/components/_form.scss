@@ -1,0 +1,17 @@
+@import "../themes/dark";
+@import "../themes/light";
+
+@mixin themable($theme-name, $theme-map) {
+  .#{$theme-name} {
+    .form-content {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 20px;
+    }
+  }
+}
+
+@include themable(light, $light);
+@include themable(dark, $dark);
