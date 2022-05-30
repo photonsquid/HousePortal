@@ -1,21 +1,11 @@
 import MainInterface from 'components/MainInterface';
-import TabView, { Tab, TabCategory } from 'components/TabView';
+import TabView, { TabCategory } from 'components/TabView';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { BiCog, BiLock } from 'react-icons/bi';
 import { MdOutlineAccountCircle } from 'react-icons/md';
 import { IoBrushOutline } from 'react-icons/io5';
-import Form from 'components/forms/Form';
-
-export declare interface JsonCategory {
-  name: string,
-  tabs: {
-    name: string,
-    url: string,
-    icon: JSX.Element,
-    fields: FormData
-  }[],
-}
+import Form, { FormElementType, JsonCategory } from 'components/forms/Form';
 
 export class SettingsBody {
   static jsonContent: JsonCategory[] = [
@@ -26,40 +16,37 @@ export class SettingsBody {
           name: 'General',
           url: 'general',
           icon: <BiCog size="1.3em" />,
-          fields: {
-            GeneralTestField: 'testvalue',
-            GeneralTestField2: 'testvalue',
-            GeneralTestField3: 'testvalue',
-            GeneralTestField4: 'testvalue',
-            GeneralTestField5: 'testvalue',
-            GeneralTestField6: 24,
-            GeneralTestField7: true,
-
-          },
+          fields: {},
         },
         {
           name: 'Appearance',
           url: 'appearance',
           icon: <IoBrushOutline size="1.3em" />,
           fields: {
-            AppearanceTestField: 'testvalue',
+            theme: {
+              name: 'Theme',
+              type: FormElementType.Select,
+              value: 'light',
+              options: {
+                light: 'Light',
+                dark: 'Dark',
+              },
+              editable: true,
+              description: 'The theme of the application',
+            },
           },
         },
         {
           name: 'Authentication',
           url: 'authentication',
           icon: <BiLock size="1.3em" />,
-          fields: {
-            testfield: 'testvalue',
-          },
+          fields: {},
         },
         {
           name: 'Accounts',
           url: 'accounts',
           icon: <MdOutlineAccountCircle size="1.3em" />,
-          fields: {
-            testfield: 'testvalue',
-          },
+          fields: {},
         },
 
       ],
@@ -71,17 +58,13 @@ export class SettingsBody {
           name: 'General',
           url: 'remote-general',
           icon: <BiCog size="1.3em" />,
-          fields: {
-            testfield: 'testvalue',
-          },
+          fields: {},
         },
         {
           name: 'Appearance',
           url: 'remote-appearance',
           icon: <IoBrushOutline size="1.3em" />,
-          fields: {
-            testfield: 'testvalue',
-          },
+          fields: {},
         },
       ],
     },
@@ -98,10 +81,6 @@ export class SettingsBody {
       })),
     } as TabCategory));
   }
-}
-
-export declare interface FormData {
-  [key: string]: string | number | boolean | FormData;
 }
 
 export default function Settings({ theme, toggleTheme }: {theme: string, toggleTheme: () => void}) {
