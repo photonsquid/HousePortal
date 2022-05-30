@@ -14,7 +14,7 @@ export default class Session {
 
   static userToken = '';
 
-  static apiUrl = 'https://randomapiurl.fr'; // temporary
+  static apiUrl = 'https://houseportal-api.photonsquid.fr';
 
   /**
    * A function that requests a new bearer token.
