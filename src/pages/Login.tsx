@@ -2,21 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from 'assets/photonsquid.svg';
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
-import ThemeSwitcher from 'components/ThemeSwitcher';
 import { isDev } from 'App';
 import Session from 'utils/Session';
 import Spinner from 'components/loading/Spinner';
-
-export declare interface LoginProps {
-  theme?: string
-  toggleTheme?: () => void
-}
 
 /**
  * A page that allows a user to log in.
  * @returns {JSX.Element}
  */
-export default function Login({ theme, toggleTheme }: LoginProps): JSX.Element {
+export default function Login(): JSX.Element {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [error, setError] = React.useState('');
@@ -55,7 +49,6 @@ export default function Login({ theme, toggleTheme }: LoginProps): JSX.Element {
 
   return (
     <div className="credentials-wrapper">
-      <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
       <div className="card centered centered-content">
         <div className="card-header centered-content">
           {isLoading ? (

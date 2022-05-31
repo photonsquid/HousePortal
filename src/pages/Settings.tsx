@@ -97,12 +97,12 @@ export class SettingsBody {
   }
 }
 
-export default function Settings({ theme, toggleTheme }: {theme: string, toggleTheme: () => void}) {
+export default function Settings() {
   const { tabUrl } = useParams();
   const content = SettingsBody.getContent();
 
   return (
-    <MainInterface theme={theme} toggleTheme={toggleTheme}>
+    <MainInterface>
       <TabView
         content={content}
         current={tabUrl || content[0].tabs[0].url}

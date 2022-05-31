@@ -1,6 +1,6 @@
 import React from 'react';
 
-export declare interface DeviceThumbnailProps {
+export declare interface DeviceProps {
   icon: JSX.Element,
   name: string,
   owner: string,
@@ -10,7 +10,7 @@ export declare interface DeviceThumbnailProps {
 
 export default function Device({
   icon, name, owner, controller, info,
-}: DeviceThumbnailProps) {
+}: DeviceProps) {
   return (
     <div className="dashboard-card device-thumbnail-wrapper">
       <div className="dashboard-card-content centered-content">

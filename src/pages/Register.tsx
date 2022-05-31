@@ -2,20 +2,14 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
-import ThemeSwitcher from 'components/ThemeSwitcher';
 import Session from 'utils/Session';
 import SpellCheck, { ContentType } from 'utils/SpellCheck';
-
-export declare interface RegisterProps {
-  theme?: string,
-  toggleTheme?: () => void
-}
 
 /**
  * A page that allows a user to create an account.
  * @returns {JSX.Element}
  */
-export default function Register({ theme, toggleTheme }: RegisterProps): JSX.Element {
+export default function Register(): JSX.Element {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [passwordRed, setPasswordRed] = React.useState('');
@@ -96,7 +90,6 @@ export default function Register({ theme, toggleTheme }: RegisterProps): JSX.Ele
 
   return (
     <div className="credentials-wrapper">
-      <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
       <div className="card centered centered-content">
         <div className="card-header">
           <h1>Sign up</h1>

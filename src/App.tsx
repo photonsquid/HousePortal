@@ -19,35 +19,43 @@ export function isDev(): boolean {
   return process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
 }
 
+export enum Theme {
+  Light = 'light',
+  Dark = 'dark',
+  System = 'system',
+}
+
 /**
  * The main application component.
  * @returns {JSX.Element}
  */
 function App(): JSX.Element {
-  const [theme, setTheme] = useState((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    document.getElementsByTagName('html')[0].className = newTheme;
-  };
+  const [theme, setTheme] = useState<Theme>((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.Dark : Theme.Light));
 
   // set theme on page load
   useEffect(() => {
     document.getElementsByTagName('html')[0].className = theme;
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (e.matches) {
+        setTheme(Theme.Dark);
+      } else {
+        setTheme(Theme.Light);
+      }
+    });
   });
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="login" element={<Login theme={theme} toggleTheme={toggleTheme} />} />
-        <Route path="register" element={<Register theme={theme} toggleTheme={toggleTheme} />} />
-        <Route path="retrieve-password" element={<Default theme={theme} />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="retrieve-password" element={<Default />} />
         <Route
           path="dashboard"
           element={(
             <PrivacyWrapper>
-              <Dashboard theme={theme} toggleTheme={toggleTheme} />
+              <Dashboard />
             </PrivacyWrapper>
           )}
         />
@@ -56,7 +64,7 @@ function App(): JSX.Element {
             path=":tabUrl"
             element={(
               <PrivacyWrapper>
-                <Settings theme={theme} toggleTheme={toggleTheme} />
+                <Settings />
               </PrivacyWrapper>
           )}
           />

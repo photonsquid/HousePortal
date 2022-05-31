@@ -20,7 +20,7 @@ export default class Session {
    * A function that requests a new bearer token.
    * Should be called when the user's session has expired.
    */
-  private static async fetchBearer() {
+  static async fetchBearer() {
     return fetch(`${Session.apiUrl}/login`, {
       method: 'POST',
       headers: {
@@ -32,7 +32,6 @@ export default class Session {
     }).then(async (response) => {
       if (response.ok) {
         Session.bearer = await response.json().then((data) => data.bearer);
-        localStorage.setItem('bearer', Session.bearer);
       }
     });
   }
@@ -45,7 +44,6 @@ export default class Session {
   static async devlogin() {
     Session.bearer = 'devBearer';
     Session.userToken = 'devToken';
-    localStorage.setItem('bearer', Session.bearer);
     localStorage.setItem('userToken', Session.userToken);
   }
 
@@ -65,11 +63,11 @@ export default class Session {
         [Session.bearer, Session.userToken] = await response.json().then(
           (data) => [data.bearer, data.token],
         );
-        localStorage.setItem('bearer', Session.bearer);
         localStorage.setItem('userToken', Session.userToken);
       } else {
         Session.bearer = '';
         Session.userToken = '';
+        localStorage.removeItem('userToken');
       }
     });
   }
@@ -81,7 +79,6 @@ export default class Session {
     // Dev logout
     if (isDev()) {
       Session.bearer = '';
-      localStorage.removeItem('bearer');
       localStorage.removeItem('userToken');
       return Promise.resolve();
     }
@@ -98,26 +95,8 @@ export default class Session {
       // the bearer token or it has already been invalidated in the past
       Session.bearer = '';
       Session.userToken = '';
-      localStorage.removeItem('bearer');
       localStorage.removeItem('userToken');
     });
-  }
-
-  /**
-   * A function that checks if the user is logged in.
-   * @returns true if the user is logged in, false otherwise
-   */
-  static async isActive() {
-    const bearer = localStorage.getItem('bearer');
-    const userToken = localStorage.getItem('userToken');
-    if (userToken && userToken.length > 0) {
-      Session.userToken = userToken;
-      if (bearer && bearer.length > 0) {
-        Session.bearer = bearer;
-      }
-      return true;
-    }
-    return false;
   }
 
   /**
@@ -136,9 +115,22 @@ export default class Session {
         [Session.bearer, Session.userToken] = await response.json().then(
           (data) => [data.bearer, data.token],
         );
-        localStorage.setItem('bearer', Session.bearer);
         localStorage.setItem('userToken', Session.userToken);
       }
     });
+  }
+
+  /**
+   * A function that checks if the session is active.
+   * @returns true if the session is active, false otherwise
+   */
+  static async isActive() {
+    const userToken = localStorage.getItem('userToken');
+    if (userToken && userToken.length > 0) {
+      // Overwrite the current user token if it's empty
+      Session.userToken = Session.userToken.length > 0 ? Session.userToken : userToken;
+      return true;
+    }
+    return false;
   }
 }
