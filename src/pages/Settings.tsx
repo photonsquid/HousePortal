@@ -1,27 +1,111 @@
 import MainInterface from 'components/MainInterface';
-import Authentication from 'components/tabs/Authentication';
-import General from 'components/tabs/General';
-import TabView from 'components/TabView';
+import TabView, { TabCategory } from 'components/TabView';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { BiCog, BiLock } from 'react-icons/bi';
+import { MdOutlineAccountCircle } from 'react-icons/md';
+import { IoBrushOutline } from 'react-icons/io5';
+import Form, { FormElementType, JsonCategory } from 'components/forms/Form';
 
-export default function Settings({ theme, toggleTheme }: {theme: string, toggleTheme: () => void}) {
-  const { tabName } = useParams();
+export class SettingsBody {
+  static jsonContent: JsonCategory[] = [
+    {
+      name: 'Local',
+      tabs: [
+        {
+          name: 'General',
+          url: 'general',
+          icon: <BiCog size="1.3em" />,
+          fields: {},
+        },
+        {
+          name: 'Appearance',
+          url: 'appearance',
+          icon: <IoBrushOutline size="1.3em" />,
+          fields: {
+            themeSelect: {
+              name: 'Theme',
+              type: FormElementType.Select,
+              value: 'Light',
+              options: {
+                light: 'Light',
+                system: 'System',
+                dark: 'Dark',
+              },
+              editable: true,
+              description: 'The theme of the application',
+            },
+            themeRadio: {
+              name: 'Theme',
+              type: FormElementType.Radio,
+              value: 'Light',
+              options: {
+                light: 'Light',
+                system: 'System',
+                dark: 'Dark',
+              },
+              editable: true,
+              description: 'The theme of the application',
+
+            },
+          },
+        },
+        {
+          name: 'Authentication',
+          url: 'authentication',
+          icon: <BiLock size="1.3em" />,
+          fields: {},
+        },
+        {
+          name: 'Accounts',
+          url: 'accounts',
+          icon: <MdOutlineAccountCircle size="1.3em" />,
+          fields: {},
+        },
+
+      ],
+    },
+    {
+      name: 'Remote',
+      tabs: [
+        {
+          name: 'General',
+          url: 'remote-general',
+          icon: <BiCog size="1.3em" />,
+          fields: {},
+        },
+        {
+          name: 'Appearance',
+          url: 'remote-appearance',
+          icon: <IoBrushOutline size="1.3em" />,
+          fields: {},
+        },
+      ],
+    },
+  ];
+
+  static getContent(): TabCategory[] {
+    return SettingsBody.jsonContent.map((category) => ({
+      name: category.name,
+      tabs: category.tabs.map((tab) => ({
+        name: tab.name,
+        url: tab.url,
+        icon: tab.icon,
+        content: <Form title={tab.name} formData={tab.fields} />,
+      })),
+    } as TabCategory));
+  }
+}
+
+export default function Settings() {
+  const { tabUrl } = useParams();
+  const content = SettingsBody.getContent();
 
   return (
-    <MainInterface theme={theme} toggleTheme={toggleTheme}>
+    <MainInterface>
       <TabView
-        tabs={[
-          {
-            name: 'General',
-            content: (<General />),
-          },
-          {
-            name: 'Authentication',
-            content: (<Authentication />),
-          },
-        ]}
-        current={tabName || 'General'}
+        content={content}
+        current={tabUrl || content[0].tabs[0].url}
       />
     </MainInterface>
   );

@@ -7,6 +7,7 @@
       &:hover {
         background-color: lighten(map-get($theme-map, btn-bg), 10%);
       }
+
       background-color: map-get($theme-map, btn-bg);
       border: 1px solid map-get($theme-map, btn-border);
       color: map-get($theme-map, btn-text);
@@ -23,55 +24,12 @@
       user-select: none;
       cursor: pointer;
       outline: 0;
-      border-radius: 4px;
-      -webkit-transition: all 0.3s ease-in-out;
-      -moz-transition: all 0.3s ease-in-out;
-      -ms-transition: all 0.3s ease-in-out;
-      -o-transition: all 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
-    }
-
-    .b-primary {
-      &:hover {
-        background-color: lighten(map-get($theme-map, btn-primary-bg), 10%);
-        color: #fff;
-      }
-      background-color: map-get($theme-map, btn-primary-bg);
-      border-color: map-get($theme-map, btn-primary-border);
-      color: map-get($theme-map, btn-primary-text);
-    }
-
-    .b-secondary {
-      &:hover {
-        background-color: lighten(map-get($theme-map, btn-secondary-bg), 10%);
-      }
-      background-color: map-get($theme-map, btn-secondary-bg);
-      border-color: map-get($theme-map, btn-secondary-border);
-      color: map-get($theme-map, btn-secondary-text);
-    }
-
-    .b-error {
-      &:hover {
-        background-color: #e05a5a;
-        color: #fff;
-      }
-      background-color: map-get($theme-map, btn-error-bg);
-      border-color: map-get($theme-map, btn-error-border);
-      color: map-get($theme-map, btn-error-text);
-    }
-
-    .b-soft {
-      &:hover {
-        background-color: lighten(map-get($theme-map, btn-secondary-bg), 10%);
-        border-color: map-get($theme-map, btn-secondary-border);
-      }
-      background-color: rgba(0, 0, 0, 0);
-      border-color: rgba(0, 0, 0, 0);
-      color: map-get($theme-map, btn-secondary-text);
-    }
-
-    .b-shadow:hover {
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      -webkit-transition: background-color all 0.3s ease-in-out;
+      -moz-transition: background-color all 0.3s ease-in-out;
+      -ms-transition: background-color all 0.3s ease-in-out;
+      -o-transition: background-color all 0.3s ease-in-out;
+      transition: background-color all 0.3s ease-in-out;
     }
 
     .circle-btn {
@@ -82,6 +40,55 @@
       border: 1px solid rgba(0, 0, 0, 0);
       padding: 0;
       cursor: pointer;
+    }
+
+    .undecorated-btn {
+      background-color: rgba(0, 0, 0, 0);
+      color: inherit;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .standard-btn,
+    .circle-btn {
+      &.primary {
+        &:hover {
+          background-color: lighten(map-get($theme-map, btn-primary-bg), 10%);
+          color: #fff;
+        }
+        background-color: map-get($theme-map, btn-primary-bg);
+        border-color: map-get($theme-map, btn-primary-border);
+        color: map-get($theme-map, btn-primary-text);
+      }
+      &.secondary {
+        &:hover {
+          background-color: lighten(map-get($theme-map, btn-secondary-bg), 10%);
+        }
+        background-color: map-get($theme-map, btn-secondary-bg);
+        border-color: map-get($theme-map, btn-secondary-border);
+        color: map-get($theme-map, btn-secondary-text);
+      }
+      &.error {
+        &:hover {
+          background-color: #e05a5a;
+          color: #fff;
+        }
+        background-color: map-get($theme-map, btn-error-bg);
+        border-color: map-get($theme-map, btn-error-border);
+        color: map-get($theme-map, btn-error-text);
+      }
+      &.soft {
+        &:hover {
+          background-color: lighten(map-get($theme-map, btn-secondary-bg), 10%);
+          border-color: map-get($theme-map, btn-secondary-border);
+        }
+        background-color: rgba(0, 0, 0, 0);
+        border-color: rgba(0, 0, 0, 0);
+        color: map-get($theme-map, btn-secondary-text);
+      }
+      &.shadow:hover {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
     }
 
     .btn-icon {

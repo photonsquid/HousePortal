@@ -1,0 +1,29 @@
+@import "../themes/dark";
+@import "../themes/light";
+
+@mixin themable($theme-name, $theme-map) {
+  .#{$theme-name} {
+    .form-content {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      gap: 20px;
+    }
+
+    .form-field-content {
+      & > select {
+        width: fit-content;
+        padding: 5px 10px;
+        background-color: map-get($theme-map, "input-bg");
+        color: map-get($theme-map, "text");
+        border-radius: 6px;
+        border: 1px solid map-get($theme-map, "input-border");
+        margin: 10px 0;
+      }
+    }
+  }
+}
+
+@include themable(light, $light);
+@include themable(dark, $dark);

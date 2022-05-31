@@ -5,20 +5,29 @@
   .#{$theme-name} {
     .main-interface-wrapper {
       background-color: map-get($theme-map, bg);
+      -webkit-transition: background-color 0.3s ease-in-out;
+      -moz-transition: background-color 0.3s ease-in-out;
+      -ms-transition: background-color 0.3s ease-in-out;
+      -o-transition: background-color 0.3s ease-in-out;
       transition: background-color 0.3s ease-in-out;
-      transition: all 0.3s ease-in-out;
       color: map-get($theme-map, text);
+      box-sizing: border-box;
       width: 100vw;
       height: 100vh;
     }
 
-    .main-interface-header {
+    header[role="banner"] {
+      a {
+        color: inherit;
+      }
       box-sizing: border-box;
       width: 100%;
-      height: fit-content;
+      height: var(--Header-height);
       padding: 10px;
-      border-bottom: 1px solid map-get($theme-map, card-border);
+      border-bottom: 1px solid map-get($theme-map, zone-separator);
       background-color: map-get($theme-map, card-bg);
+      color: map-get($theme-map, text);
+      text-decoration: none;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -29,6 +38,13 @@
       flex-direction: row;
       align-items: center;
       padding: 0 10px;
+    }
+
+    .main-interface-content {
+      overflow: auto;
+      box-sizing: border-box;
+      width: 100%;
+      height: calc(100% - var(--Header-height));
     }
   }
 }

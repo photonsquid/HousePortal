@@ -2,20 +2,14 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
-import ThemeSwitcher from 'components/ThemeSwitcher';
 import Session from 'utils/Session';
 import SpellCheck, { ContentType } from 'utils/SpellCheck';
-
-export declare interface RegisterProps {
-  theme?: string,
-  toggleTheme?: () => void
-}
 
 /**
  * A page that allows a user to create an account.
  * @returns {JSX.Element}
  */
-export default function Register({ theme, toggleTheme }: RegisterProps): JSX.Element {
+export default function Register(): JSX.Element {
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [passwordRed, setPasswordRed] = React.useState('');
@@ -96,71 +90,71 @@ export default function Register({ theme, toggleTheme }: RegisterProps): JSX.Ele
 
   return (
     <div className="credentials-wrapper">
-      <ThemeSwitcher theme={theme} toggleTheme={toggleTheme} />
       <div className="card centered centered-content">
         <div className="card-header">
           <h1>Sign up</h1>
           <h3 className="text-secondary">create a HousePortal account</h3>
         </div>
-        <div className="card-body centered-content">
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Username"
-            required
-            onChange={handleInputChange}
-          />
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            required
-            onChange={handleInputChange}
-            style={{ marginBottom: '2rem' }}
-          />
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Password"
-            required
-            onChange={handleInputChange}
-          />
-          <input
-            type="password"
-            id="passwordRed"
-            name="passwordRed"
-            placeholder="Repeat password"
-            required
-            onChange={handleInputChange}
-          />
-          {errorStack.length > 0 && (
+        <form onSubmit={handleSubmit}>
+          <div className="card-body centered-content">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="Username"
+              required
+              onChange={handleInputChange}
+            />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email"
+              required
+              onChange={handleInputChange}
+              style={{ marginBottom: '2rem' }}
+            />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Password"
+              required
+              onChange={handleInputChange}
+            />
+            <input
+              type="password"
+              id="passwordRed"
+              name="passwordRed"
+              placeholder="Repeat password"
+              required
+              onChange={handleInputChange}
+            />
+            {errorStack.length > 0 && (
             <div className="card-note spacing-sm cn-error">
               {errorStack.map((error) => (<div className="error-line" key={error}>{ error }</div>))}
             </div>
-          )}
-          <ThirdPartyAuth type="register" />
-          <div className="login-submit">
-            <button
-              type="button"
-              style={{ float: 'left' }}
-              className="standard-btn b-error b-shadow"
-              onClick={handleCancel}
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="standard-btn b-primary b-shadow"
-              style={{ float: 'right' }}
-              onClick={handleSubmit}
-            >
-              {isLoading ? 'Loading...' : 'Continue'}
-            </button>
+            )}
+            <ThirdPartyAuth type="register" />
+            <div className="login-submit">
+              <button
+                type="button"
+                style={{ float: 'left' }}
+                className="standard-btn error shadow"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="standard-btn primary shadow"
+                style={{ float: 'right' }}
+              >
+                {isLoading ? 'Loading...' : 'Continue'}
+              </button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
