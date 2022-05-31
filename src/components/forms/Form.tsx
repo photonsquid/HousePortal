@@ -86,22 +86,22 @@ export default function Form({ title, formData }: FormProps) {
                   disabled={!value.editable}
                 />
               )}
-              {value.type === FormElementType.Select && (
+              {value.type === FormElementType.Select && value.options && (
                 <select
                   id={key}
                   defaultValue={value.value as string}
                   disabled={!value.editable}
                 >
-                  {Object.entries(value.options!).map(([optionsKey, optionsValue]) => (
+                  {Object.entries(value.options).map(([optionsKey, optionsValue]) => (
                     <option key={optionsKey} value={optionsKey}>
                       {optionsValue}
                     </option>
                   ))}
                 </select>
               )}
-              {value.type === FormElementType.Radio && (
+              {value.type === FormElementType.Radio && value.options && (
                 <div className="radio-group">
-                  {Object.entries(value.options!).map(([optionsKey, optionsValue]) => (
+                  {Object.entries(value.options).map(([optionsKey, optionsValue]) => (
                     <div className="radio-option" key={optionsKey}>
                       <input
                         type="radio"

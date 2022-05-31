@@ -10,6 +10,18 @@
       flex-wrap: nowrap;
       gap: 20px;
     }
+
+    .form-field-content {
+      & > select {
+        width: fit-content;
+        padding: 5px 10px;
+        background-color: map-get($theme-map, "input-bg");
+        color: map-get($theme-map, "text");
+        border-radius: 6px;
+        border: 1px solid map-get($theme-map, "input-border");
+        margin: 10px 0;
+      }
+    }
   }
 }
 

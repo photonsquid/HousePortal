@@ -24,13 +24,11 @@ export function isDev(): boolean {
  * @returns {JSX.Element}
  */
 function App(): JSX.Element {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  const [theme, setTheme] = useState((window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     document.getElementsByTagName('html')[0].className = newTheme;
-    // save theme preference to local storage
-    localStorage.setItem('theme', newTheme);
   };
 
   // set theme on page load

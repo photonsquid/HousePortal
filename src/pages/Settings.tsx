@@ -23,16 +23,30 @@ export class SettingsBody {
           url: 'appearance',
           icon: <IoBrushOutline size="1.3em" />,
           fields: {
-            theme: {
+            themeSelect: {
               name: 'Theme',
               type: FormElementType.Select,
-              value: 'light',
+              value: 'Light',
               options: {
                 light: 'Light',
+                system: 'System',
                 dark: 'Dark',
               },
               editable: true,
               description: 'The theme of the application',
+            },
+            themeRadio: {
+              name: 'Theme',
+              type: FormElementType.Radio,
+              value: 'Light',
+              options: {
+                light: 'Light',
+                system: 'System',
+                dark: 'Dark',
+              },
+              editable: true,
+              description: 'The theme of the application',
+
             },
           },
         },
