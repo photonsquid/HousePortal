@@ -5,6 +5,7 @@ import ThirdPartyAuth from 'components/ThirdPartyAuth';
 import { isDev } from 'App';
 import Session from 'utils/Session';
 import Spinner from 'components/loading/Spinner';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 /**
  * A page that allows a user to log in.
@@ -52,13 +53,22 @@ export default function Login(): JSX.Element {
     <div className="credentials-wrapper">
       <div className="card centered centered-content">
         <div className="card-header centered-content">
-          {isLoading ? (
-            <div className="login-loading-wrapper centered-content">
-              <Spinner />
-            </div>
-          ) : (
-            <img src={logo} className="profile-pic-login" alt="logo" />
-          )}
+          <SwitchTransition mode="out-in">
+            <CSSTransition
+              key={isLoading ? 'loading' : 'form'}
+              addEndListener={(node, done) => {
+                node.addEventListener('transitionend', done, false);
+              }}
+              classNames="header-icon"
+            >
+              {isLoading ? (
+                <div className="login-loading-wrapper centered-content">
+                  <Spinner />
+                </div>
+              ) : (
+                <img src={logo} className="profile-pic-login" alt="logo" />)}
+            </CSSTransition>
+          </SwitchTransition>
           <h1>Sign in</h1>
           <h3 className="text-secondary">with a HousePortal account</h3>
         </div>

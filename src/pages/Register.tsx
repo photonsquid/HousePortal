@@ -76,11 +76,15 @@ export default function Register(): JSX.Element {
         email,
         pwd: password,
       }).then(() => {
-        setIsLoading(false);
-        navigate('/');
+        setTimeout(() => {
+          setIsLoading(false);
+          navigate('/');
+        }, 250);
       }).catch((err) => {
-        setIsLoading(false);
-        setErrorStack([err.message]);
+        setTimeout(() => {
+          setIsLoading(false);
+          setErrorStack([err.message]);
+        }, 250);
       });
     }
   }
