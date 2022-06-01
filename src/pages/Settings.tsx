@@ -19,8 +19,8 @@ export class SettingsBody {
           icon: <BiCog size="1.3em" />,
           fields: [
             {
-              name: 'Size of your dick',
-              id: 'dick-size',
+              name: 'UI size',
+              id: 'ui-size',
               type: FieldType.Select,
               default: 'small',
               options: {
@@ -30,7 +30,7 @@ export class SettingsBody {
                 enormous: 'Enormous',
               },
               editable: true,
-              description: 'The size of your dick',
+              description: 'The size of the user interface',
             },
           ],
         },

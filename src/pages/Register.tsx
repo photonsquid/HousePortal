@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
 import Session from 'utils/Session';
 import SpellCheck, { ContentType } from 'utils/SpellCheck';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 /**
  * A page that allows a user to create an account.
@@ -76,11 +77,15 @@ export default function Register(): JSX.Element {
         email,
         pwd: password,
       }).then(() => {
-        setIsLoading(false);
-        navigate('/');
+        setTimeout(() => {
+          setIsLoading(false);
+          navigate('/');
+        }, 250);
       }).catch((err) => {
-        setIsLoading(false);
-        setErrorStack([err.message]);
+        setTimeout(() => {
+          setIsLoading(false);
+          setErrorStack([err.message]);
+        }, 250);
       });
     }
   }
@@ -146,13 +151,23 @@ export default function Register(): JSX.Element {
               >
                 Cancel
               </button>
-              <button
-                type="submit"
-                className="standard-btn primary shadow"
-                style={{ float: 'right' }}
-              >
-                {isLoading ? 'Loading...' : 'Continue'}
-              </button>
+              <SwitchTransition mode="out-in">
+                <CSSTransition
+                  key={isLoading ? 'loading' : 'form'}
+                  addEndListener={(node, done) => {
+                    node.addEventListener('transitionend', done, false);
+                  }}
+                  classNames="fade"
+                >
+                  <button
+                    type="submit"
+                    className="standard-btn primary shadow"
+                    style={{ float: 'right' }}
+                  >
+                    {isLoading ? 'Loading...' : 'Continue'}
+                  </button>
+                </CSSTransition>
+              </SwitchTransition>
             </div>
           </div>
         </form>

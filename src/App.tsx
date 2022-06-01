@@ -16,7 +16,6 @@ import Settings, { SettingsBody } from 'pages/Settings';
  * @returns {boolean} true if the user is logged in
  */
 export function isDev(): boolean {
-  return false;
   return process.env.NODE_ENV === 'development' || !process.env.NODE_ENV;
 }
 
