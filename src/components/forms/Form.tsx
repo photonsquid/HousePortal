@@ -78,6 +78,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                   id={key}
                   defaultValue={value.default as string}
                   disabled={!value.editable}
+                  className="form-field-input text"
                 />
               )}
               {value.type === FieldType.Password && (
@@ -86,6 +87,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                   id={key}
                   defaultValue={value.default as string}
                   disabled={!value.editable}
+                  className="form-field-input password"
                 />
               )}
               {value.type === FieldType.Number && (
@@ -94,6 +96,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                   id={key}
                   defaultValue={value.default as number}
                   disabled={!value.editable}
+                  className="form-field-input number"
                 />
               )}
               {value.type === FieldType.Checkbox && (
@@ -102,6 +105,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                   id={key}
                   checked={value.default as boolean}
                   disabled={!value.editable}
+                  className="form-field-input checkbox"
                 />
               )}
               {value.type === FieldType.Select && value.options && (
@@ -109,6 +113,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                   id={key}
                   defaultValue={value.default as string}
                   disabled={!value.editable}
+                  className="form-field-input select"
                 >
                   {Object.entries(value.options).map(([optionsKey, optionsValue]) => (
                     <option key={optionsKey} defaultValue={optionsKey}>
@@ -126,6 +131,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                         id={optionsKey}
                         name={value.name}
                         defaultChecked={optionsKey === value.default}
+                        className="form-field-input radio"
                       />
                       <label htmlFor={optionsKey}>{optionsValue}</label>
                     </div>
@@ -137,6 +143,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                   id={key}
                   defaultValue={value.default as string}
                   disabled={!value.editable}
+                  className="form-field-input textarea"
                 />
               )}
               {value.type === FieldType.Date && (
@@ -145,6 +152,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                   id={key}
                   defaultValue={value.default as string}
                   disabled={!value.editable}
+                  className="form-field-input date"
                 />
               )}
               {value.type === FieldType.Time && (
@@ -153,6 +161,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                   id={key}
                   defaultValue={value.default as string}
                   disabled={!value.editable}
+                  className="form-field-input time"
                 />
               )}
               {value.type === FieldType.DateTime && (
@@ -161,6 +170,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                   id={key}
                   defaultValue={value.default as string}
                   disabled={!value.editable}
+                  className="form-field-input datetime"
                 />
               )}
               {value.type === FieldType.Hidden && (
@@ -169,6 +179,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
                   id={key}
                   defaultValue={value.default as string}
                   disabled={!value.editable}
+                  className="form-field-input hidden"
                 />
               )}
             </div>

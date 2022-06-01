@@ -11,8 +11,8 @@
       gap: 20px;
     }
 
-    .form-field-content {
-      & > select {
+    .form-field-input {
+      &.select {
         width: fit-content;
         padding: 5px 10px;
         background-color: map-get($theme-map, "input-bg");
@@ -20,6 +20,12 @@
         border-radius: 6px;
         border: 1px solid map-get($theme-map, "input-border");
         margin: 10px 0;
+      }
+
+      &.text {
+        padding: 5px 10px;
+        width: fit-content;
+        height: fit-content;
       }
     }
   }

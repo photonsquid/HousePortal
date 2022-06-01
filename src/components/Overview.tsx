@@ -1,6 +1,6 @@
 import React from 'react';
 import { GoLightBulb } from 'react-icons/go';
-import { GiCrosshair } from 'react-icons/gi';
+import { GiLed } from 'react-icons/gi';
 import RemoteStorage from 'utils/RemoteStorage';
 import Device from './Device';
 
@@ -17,7 +17,7 @@ export default function Overview(): JSX.Element {
       </div>
       <div className="device-list">
         <Device
-          icon={<GoLightBulb size="4em" />}
+          icon={<GiLed size="4em" />}
           name="Light Bulb"
           owner="Bedroom"
           controller={(
@@ -40,22 +40,24 @@ export default function Overview(): JSX.Element {
 
         />
         <Device
-          icon={<GiCrosshair size="4em" />}
-          name="Air strike"
-          owner="North korea"
+          icon={<GoLightBulb size="4em" />}
+          name="Light Bulb"
+          owner="Living Room"
           controller={(
             <button
               type="button"
               className="standard-btn"
             >
-              <strong>Launch</strong>
+              <strong>On / Off</strong>
             </button>
           )}
           info={(
             <div>
-              Hwasong-15 Missile
+              BlitzWolf BlitzWolf BW-LT27 AC100-240V
               <br />
-              Location: Silo 24
+              Status:
+              {' '}
+              <span className="text-error">Off</span>
             </div>
           )}
         />
