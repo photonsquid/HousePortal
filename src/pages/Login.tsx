@@ -59,7 +59,7 @@ export default function Login(): JSX.Element {
               addEndListener={(node, done) => {
                 node.addEventListener('transitionend', done, false);
               }}
-              classNames="header-icon"
+              classNames="fade"
             >
               {isLoading ? (
                 <div className="login-loading-wrapper centered-content">
