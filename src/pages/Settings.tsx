@@ -32,6 +32,29 @@ export class SettingsBody {
               editable: true,
               description: 'The size of the user interface',
             },
+            {
+              name: 'Language',
+              id: 'language',
+              type: FieldType.Select,
+              default: 'english',
+              options: {
+                english: 'English',
+                french: 'French',
+                spanish: 'Spanish',
+                Japanese: 'Japanese',
+              },
+              editable: true,
+              description: 'The language of the user interface',
+            },
+            {
+              name: 'Personal website',
+              id: 'personal-website',
+              type: FieldType.Text,
+              default: 'https://www.example.com',
+              editable: true,
+              description: 'The personal website of the user',
+            },
+
           ],
         },
         {
@@ -51,20 +74,6 @@ export class SettingsBody {
               },
               editable: true,
               description: 'The theme of the application',
-            },
-            {
-              name: 'Theme',
-              id: 'theme-radiobutton',
-              type: FieldType.Radio,
-              default: 'light',
-              options: {
-                light: 'Light',
-                system: 'System',
-                dark: 'Dark',
-              },
-              editable: true,
-              description: 'The theme of the application',
-
             },
           ],
         },
