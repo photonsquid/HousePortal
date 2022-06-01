@@ -67,7 +67,8 @@ export default function Register(): JSX.Element {
     navigate('/');
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     if (checkFormValidity(true)) {
       setIsLoading(true);
       Session.createUser({

@@ -25,7 +25,7 @@ export default class RemoteStorage {
    * fetch a new one and try again.
    * @param callback the callback to run
    */
-  private static async attemptRequest(callback: () => Promise<unknown>) {
+  private static async attemptRequest<T>(callback: () => Promise<T>) {
     return callback().catch((error) => {
       if (error.status === 401) {
         return Session.fetchBearer().then(() => callback());

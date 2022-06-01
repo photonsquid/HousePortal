@@ -1,5 +1,7 @@
 FROM node:17
 
+LABEL org.opencontainers.image.description "HousePortal is a clean and minimal interface to monitor and control your smart devices, such as light bulbs, light switches, TVs, bluetooth speakers, and many others."
+
 ENV PORT 8080
 
 WORKDIR /app/houseportal

@@ -29,7 +29,8 @@ export default function Login(): JSX.Element {
     }
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
     setIsLoading(true);
     (isDev() ? Session.devlogin() : Session.login({
       email,

@@ -6,11 +6,11 @@ export declare interface JsonCategory {
     name: string,
     url: string,
     icon: JSX.Element,
-    fields: FormData
+    fields: Field[]
   }[],
 }
 
-export enum FormElementType {
+export enum FieldType {
   Text = 'text',
   Password = 'password',
   Number = 'number',
@@ -24,28 +24,46 @@ export enum FormElementType {
   Hidden = 'hidden',
 }
 
-export declare interface FormElement {
+export declare interface Field {
+  /** The name displayed in the form. */
   name: string,
-  type: FormElementType,
-  value: string | number | boolean | File | Date | FormData,
+  /** The id of the field: must be unique. */
+  id: string,
+  /** The field type. */
+  type: FieldType,
+  /** The default value of the field. */
+  default: string | number | boolean | File | Date | Field,
+  /** Field editability. */
   editable?: boolean,
+  /** Field visibility. */
   visible?: boolean,
+  /** Field options (required for select and radio fields). */
   options?: {
     [key: string]: string
   },
+  /** Field description, will be displayed on mouse hover. */
   description?: string,
-}
-
-export declare interface FormData {
-  [key: string]: FormElement;
+  fieldAction?: FieldActions
 }
 
 export declare interface FormProps {
   title: string,
-  formData: FormData,
+  formData: Field[],
+  fieldActions: FieldActions
 }
 
-export default function Form({ title, formData }: FormProps) {
+export declare interface FieldActions {
+  get: (id: string) => any,
+  set: (id: string, value: string) => void,
+}
+
+export default function Form({ title, formData, fieldActions: formActions }: FormProps) {
+  // retrieve the form data from the storage
+  const formDataValues = formData.map((field) => ({
+    ...field,
+    value: formActions.get(field.id),
+  }));
+
   return (
     <div className="form">
       <h2>{title}</h2>
@@ -54,103 +72,102 @@ export default function Form({ title, formData }: FormProps) {
           <div className="form-field" key={key}>
             <label htmlFor={key}>{value.name}</label>
             <div className="form-field-content">
-              {value.type === FormElementType.Text && (
+              {value.type === FieldType.Text && (
                 <input
                   type="text"
                   id={key}
-                  value={value.value as string}
+                  defaultValue={value.default as string}
                   disabled={!value.editable}
                 />
               )}
-              {value.type === FormElementType.Password && (
+              {value.type === FieldType.Password && (
                 <input
                   type="password"
                   id={key}
-                  value={value.value as string}
+                  defaultValue={value.default as string}
                   disabled={!value.editable}
                 />
               )}
-              {value.type === FormElementType.Number && (
+              {value.type === FieldType.Number && (
                 <input
                   type="number"
                   id={key}
-                  value={value.value as number}
+                  defaultValue={value.default as number}
                   disabled={!value.editable}
                 />
               )}
-              {value.type === FormElementType.Checkbox && (
+              {value.type === FieldType.Checkbox && (
                 <input
                   type="checkbox"
                   id={key}
-                  checked={value.value as boolean}
+                  checked={value.default as boolean}
                   disabled={!value.editable}
                 />
               )}
-              {value.type === FormElementType.Select && value.options && (
+              {value.type === FieldType.Select && value.options && (
                 <select
                   id={key}
-                  defaultValue={value.value as string}
+                  defaultValue={value.default as string}
                   disabled={!value.editable}
                 >
                   {Object.entries(value.options).map(([optionsKey, optionsValue]) => (
-                    <option key={optionsKey} value={optionsKey}>
+                    <option key={optionsKey} defaultValue={optionsKey}>
                       {optionsValue}
                     </option>
                   ))}
                 </select>
               )}
-              {value.type === FormElementType.Radio && value.options && (
+              {value.type === FieldType.Radio && value.options && (
                 <div className="radio-group">
                   {Object.entries(value.options).map(([optionsKey, optionsValue]) => (
                     <div className="radio-option" key={optionsKey}>
                       <input
                         type="radio"
                         id={optionsKey}
-                        name={optionsKey}
-                        value={optionsKey}
-                        checked={optionsKey === optionsValue}
+                        name={value.name}
+                        defaultChecked={optionsKey === value.default}
                       />
                       <label htmlFor={optionsKey}>{optionsValue}</label>
                     </div>
                   ))}
                 </div>
               )}
-              {value.type === FormElementType.Textarea && (
+              {value.type === FieldType.Textarea && (
                 <textarea
                   id={key}
-                  value={value.value as string}
+                  defaultValue={value.default as string}
                   disabled={!value.editable}
                 />
               )}
-              {value.type === FormElementType.Date && (
+              {value.type === FieldType.Date && (
                 <input
                   type="date"
                   id={key}
-                  value={value.value as string}
+                  defaultValue={value.default as string}
                   disabled={!value.editable}
                 />
               )}
-              {value.type === FormElementType.Time && (
+              {value.type === FieldType.Time && (
                 <input
                   type="time"
                   id={key}
-                  value={value.value as string}
+                  defaultValue={value.default as string}
                   disabled={!value.editable}
                 />
               )}
-              {value.type === FormElementType.DateTime && (
+              {value.type === FieldType.DateTime && (
                 <input
                   type="datetime"
                   id={key}
-                  value={value.value as string}
+                  defaultValue={value.default as string}
                   disabled={!value.editable}
                 />
               )}
-              {value.type === FormElementType.Hidden && (
+              {value.type === FieldType.Hidden && (
                 <input
                   type="hidden"
                   id={key}
-                  value={value.value as string}
+                  defaultValue={value.default as string}
                   disabled={!value.editable}
                 />
               )}
