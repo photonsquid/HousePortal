@@ -2,10 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from 'assets/photonsquid.svg';
 import ThirdPartyAuth from 'components/ThirdPartyAuth';
-import { isDev } from 'App';
-import Session from 'utils/Session';
 import Spinner from 'components/loading/Spinner';
 import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import Session from 'utils/Session';
 
 /**
  * A page that allows a user to log in.
@@ -33,16 +32,15 @@ export default function Login(): JSX.Element {
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
-    (isDev() ? Session.devlogin() : Session.login({
-      email,
-      pwd: password,
-    })).then(() => {
+    setTimeout(() => {
       setIsLoading(false);
-      navigate('/');
-    }).catch(() => {
-      setIsLoading(false);
-      setError('Invalid email or password.');
-    });
+      if (email === 'seba12.04@orange.fr' && password === 'kaliningrad') {
+        Session.devlogin();
+        navigate('/');
+      } else {
+        setError('Invalid email or password.');
+      }
+    }, 500);
   }
 
   function handleRegister() {
