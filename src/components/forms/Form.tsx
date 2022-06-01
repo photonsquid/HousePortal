@@ -53,13 +53,13 @@ export declare interface FormProps {
 }
 
 export declare interface FieldActions {
-  get: (id: string) => any,
+  get: (id: string) => Promise<string>,
   set: (id: string, value: string) => void,
 }
 
 export default function Form({ title, formData, fieldActions: formActions }: FormProps) {
   // retrieve the form data from the storage
-  const formDataValues = formData.map((field) => ({
+  const fetchedFormData = formData.map((field) => ({
     ...field,
     value: formActions.get(field.id),
   }));
@@ -68,7 +68,7 @@ export default function Form({ title, formData, fieldActions: formActions }: For
     <div className="form">
       <h2>{title}</h2>
       <div className="form-content">
-        {Object.entries(formData).map(([key, value]) => (
+        {Object.entries(fetchedFormData).map(([key, value]) => (
           <div className="form-field" key={key}>
             <label htmlFor={key}>{value.name}</label>
             <div className="form-field-content">

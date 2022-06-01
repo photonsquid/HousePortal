@@ -71,7 +71,7 @@ export default class RemoteStorage {
     }).then((response) => response.json()));
   }
 
-  static async getUserSetting(key: string) {
+  static async getUserSetting(key: string): Promise<string> {
     return this.attemptRequest(async () => fetch(`${this.apiUrl}/users/settings/${key}`, {
       headers: {
         Authorization: `Bearer ${Session.bearer}`,
