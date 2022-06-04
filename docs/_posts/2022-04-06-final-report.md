@@ -7,10 +7,10 @@ date: 2022-04-06 00:00:00 -0000
 ---
 
 
-# HousePortal - Compte rendu final - repartition des taches
+# HousePortal - Compte rendu final - répartition des taches
 
 ## Sommaire
-- [HousePortal - Compte rendu final - repartition des taches](#houseportal---compte-rendu-final---repartition-des-taches)
+- [HousePortal - Compte rendu final - répartition des taches](#houseportal---compte-rendu-final---répartition-des-taches)
   - [Sommaire](#sommaire)
   - [Introduction](#introduction)
   - [Répartition](#répartition)
@@ -34,6 +34,13 @@ Nous avons fait le choix (assez naturel dans le cadre de la construction d'une a
 
 ## Détail des tâches
 
-cf [Tâches réalisées](https://www.github.com/photonsquid/projects/4/views/2)
+Les users stories ainsi que les features qui leurs sont associées sont détaillées sur le Kanban ("project" sur GitHub) disponible à [cette adresse](https://www.github.com/photonsquid/projects/4/views/2). Chaque issue ("ticket" en français) correspond ainsi à une user story, et contient une liste de tâches cochables (features) disposées suivant le format suivant:
+
+**User story**
+Description de la user story.
+- [ ] Feature 1
+- [ ] Feature 2
+- [ ] Feature 3
 
 
+Le travail a été réparti de la façon la plus équitable possible, en fonction de la disponibilité des membres de l'équipe.
