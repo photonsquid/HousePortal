@@ -33,3 +33,7 @@
   ```bash
   yarn start
   ```
+
+## User support
+
+Having trouble accessing our platform? Check our [service status page 🔗](https://stats.uptimerobot.com/1D5lVT63kJ)
