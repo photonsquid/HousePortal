@@ -23,7 +23,7 @@
 
 - ⬇️ Download the latest release from [github](https://github.com/photonsquid/HousePortal/releases/latest "Latest release of HousePortal") or clone the repository
 
-- ⚒️ Install the dependencies (using yarn is recommended)
+- ⚒️ Install thhttps://docs.google.com/presentation/d/1vF6okqVF-qJgH8nX9oM9oRNd83ruyr0J7m_S1gjH34k/edit#slide=id.gf4ffa60cf2_0_304e dependencies (using yarn is recommended)
   ```bash
   cd HousePortal
   yarn install
@@ -34,6 +34,6 @@
   yarn start
   ```
 
-## User support
+## Technical support
 
-Having trouble accessing our platform? Check our [service status page 🔗](https://stats.uptimerobot.com/1D5lVT63kJ)
+Having trouble accessing our platform? Check our [🟢 service status page](https://stats.uptimerobot.com/1D5lVT63kJ) or contact us at [📫 contact@photonsquid.fr](mailto:contact@photonsquid.fr)
