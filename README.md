@@ -6,6 +6,10 @@
 
 *Built with React JS*.
 
+> ⚠️ Important note
+> 
+> This project is archived and will no longer be updated nor improved from now on. The code remains free to access and reuse if needed, but no technical support will be provided.
+
 ## Installation
 
 ### Using docker
@@ -35,5 +39,7 @@
   ```
 
 ## Technical support
+
+_As per the above disclaimer, support is discontinued._
 
 Having trouble accessing our platform? Check our [🟢 service status page](https://stats.uptimerobot.com/1D5lVT63kJ) or contact us at [📫 contact@photonsquid.fr](mailto:contact@photonsquid.fr)
